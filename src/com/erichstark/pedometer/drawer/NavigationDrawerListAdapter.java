@@ -1,9 +1,10 @@
-package com.erichstark.pedometer.adapter;
+package com.erichstark.pedometer.drawer;
 
 import java.util.ArrayList;
 
 import com.erichstark.pedometer.R;
-import com.erichstark.pedometer.model.NavigationDrawerItem;
+
+
 
 
 

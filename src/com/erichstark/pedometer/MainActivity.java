@@ -2,8 +2,8 @@ package com.erichstark.pedometer;
 
 import java.util.ArrayList;
 
-import com.erichstark.pedometer.adapter.NavigationDrawerListAdapter;
-import com.erichstark.pedometer.model.NavigationDrawerItem;
+import com.erichstark.pedometer.drawer.NavigationDrawerItem;
+import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
 
 import android.app.Activity;
 import android.app.ActionBar;

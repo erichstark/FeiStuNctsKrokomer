@@ -1,4 +1,4 @@
-package com.erichstark.pedometer.model;
+package com.erichstark.pedometer.drawer;
 
 public class NavigationDrawerItem {
 
