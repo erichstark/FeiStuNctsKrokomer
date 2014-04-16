@@ -4,22 +4,23 @@ import java.util.ArrayList;
 
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
+import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
+import com.erichstark.pedometer.sqlite.model.Login;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.os.Build;
 
 public class MainActivity extends Activity {
 
@@ -39,12 +40,29 @@ public class MainActivity extends Activity {
 
 	private ArrayList<NavigationDrawerItem> navDrawerItems;
 	private NavigationDrawerListAdapter navDrawerAdapter;
+	
+	// DATABASE
+	private DatabaseHelper db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
+		// new db
+		db = new DatabaseHelper(getApplicationContext());
+		
+		Login login = new Login("clientID",	"clientsecret", "accesstoken", "refreshtoken", 157856, "userid", "userpara", "timestampt");
+		long log1 = db.createLogin(login);
+		
+		Log.d("create login", db.getLogin(1).getAccess_token() + "c " + log1);
+		
+//		 Tag tag4 = new Tag("Androidhive");
+//		 
+//	        // Inserting tags in db
+//	        long tag1_id = db.createTag(tag1);
+		
+		db.close();
 		// set title
 		appTitle = navDrawerTitle = getTitle();
 
