@@ -4,13 +4,17 @@ import java.util.ArrayList;
 
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
+import com.erichstark.pedometer.oauth2.AsyncTaskLoginData;
+import com.erichstark.pedometer.oauth2.WebViewActivity;
 import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
 import com.erichstark.pedometer.sqlite.model.Login;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -21,8 +25,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	
+	public static final String appId = "417483e552844d0a8bd37fb7166401a0";
+	public static final String appSecret = "4f6afba3cf624833807e9f64ca2638d6";
+	public static final String API_NAME = 
+			"&APIName=OpenApiActivity+OpenApiBG+OpenApiSleep+OpenApiUserInfo+OpenApiWeight&RequiredAPIName=OpenApiActivity+OpenApiBG+OpenApiSleep+OpenApiUserInfo+OpenApiWeight";
 
 	private DrawerLayout drawerLayout;
 	private ListView drawerListView;
@@ -49,18 +59,47 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		// new db
 		db = new DatabaseHelper(getApplicationContext());
 		
-		Login login = new Login("clientID",	"clientsecret", "accesstoken", "refreshtoken", 157856, "userid", "userpara", "timestampt");
-		long log1 = db.createLogin(login);
+
+		Intent intent = new Intent(this, WebViewActivity.class);
+		intent.putExtra(
+				"Key",
+				"https://api.ihealthlabs.com:8443/OpenApiV2/OAuthv2/userauthorization/?"
+						+ "client_id="
+						+ appId
+						+ "&response_type=code&redirect_uri=http://erichstark.com/"
+						+ API_NAME);
 		
-		Log.d("create login", db.getLogin(1).getAccess_token() + "c " + log1);
+		startActivityForResult(intent, 1);
+		
+		
+		//intent.get
+		//onActivityResult(int requestCode, intent., intent.getExtras());
+		
+		// new db
+		//db = new DatabaseHelper(getApplicationContext());
+		
+		//Login login = new Login("clientID",	"clientsecret", "accesstoken", "refreshtoken", 157856, "userid", "userpara", "timestampt");
+		//long log1 = db.createLogin(login);
+		
+		Log.d("show login1", db.getLogin(1).getAccess_token() + "c " + db.getLogin(1).getId());
+		//Log.d("show login5", db.getLogin(5).getAccess_token() + "c " + db.getLogin(5).getId());
+		//Log.d("show login6", db.getLogin(6).getAccess_token() + "c " + db.getLogin(6).getId());
+		//Log.d("show login7", db.getLogin(7).getAccess_token() + "c " + db.getLogin(7).getId());
 		
 //		 Tag tag4 = new Tag("Androidhive");
 //		 
 //	        // Inserting tags in db
 //	        long tag1_id = db.createTag(tag1);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		db.close();
 		// set title
@@ -137,6 +176,9 @@ public class MainActivity extends Activity {
 			// .add(R.id.container, new PlaceholderFragment()).commit();
 			// zavolam custom displayView(0);
 		}
+		
+		Log.d("KONIEC", "koniec oncreate");
+
 	}
 
 	@Override
@@ -225,5 +267,31 @@ public class MainActivity extends Activity {
 			return rootView;
 		}
 	}
+	
+	
+	// vrati mi hodnotu z webview
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		  if (requestCode == 1) {
+
+		     if(resultCode == RESULT_OK){      
+		         String result=data.getStringExtra("result");   
+		         Log.d("som v resulOK", "resultOK: " + result);
+		         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+		         
+//					GetContacts2 getData = new GetContacts2();
+//					AsyncTask<String, String, Void> asyncGetData = getData.execute(dataUrl);
+		         AsyncTaskLoginData getLoginData = new AsyncTaskLoginData(getApplicationContext());
+		         AsyncTask<String, Void, String[]> asyncGetLoginData = getLoginData.execute(result);
+		    
+		     }
+		     if (resultCode == RESULT_CANCELED) {    
+		         //Write your code if there's no result
+		    	 Log.d("som v resul cancel", "result CANCEL");
+		     }
+		  }
+		}
+
 
 }
