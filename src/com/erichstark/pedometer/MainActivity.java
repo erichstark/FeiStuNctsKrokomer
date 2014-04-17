@@ -1,6 +1,9 @@
 package com.erichstark.pedometer;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
@@ -29,8 +32,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	public static final String appId = "417483e552844d0a8bd37fb7166401a0";
-	public static final String appSecret = "4f6afba3cf624833807e9f64ca2638d6";
+	public static final String CLIENT_ID = "417483e552844d0a8bd37fb7166401a0";
+	public static final String CLIENT_SECRET = "4f6afba3cf624833807e9f64ca2638d6";
 	public static final String API_NAME = 
 			"&APIName=OpenApiActivity+OpenApiBG+OpenApiSleep+OpenApiUserInfo+OpenApiWeight&RequiredAPIName=OpenApiActivity+OpenApiBG+OpenApiSleep+OpenApiUserInfo+OpenApiWeight";
 
@@ -61,47 +64,42 @@ public class MainActivity extends Activity {
 		
 		db = new DatabaseHelper(getApplicationContext());
 		
-
-		Intent intent = new Intent(this, WebViewActivity.class);
-		intent.putExtra(
-				"Key",
-				"https://api.ihealthlabs.com:8443/OpenApiV2/OAuthv2/userauthorization/?"
-						+ "client_id="
-						+ appId
-						+ "&response_type=code&redirect_uri=http://erichstark.com/"
-						+ API_NAME);
+//		SimpleDateFormat dateFormat = new SimpleDateFormat(
+//                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+//        Date date = new Date();
+//        dateFormat.format(date);
+        
+//		Log.d("show login1 before: ", db.getLogin(1).getAccess_token() + "c " + db.getLogin(1).getId());
+//		
+//		Login logg = new Login(1,"clID","clSecret","accessTok","refresToke",7501,"usrID", "usrPara","cas");
+//		db.updateLogin(logg);
+//		Log.d("show login1 after:", db.getLogin(1).getAccess_token() + "c " + db.getLogin(1).getId());
 		
-		startActivityForResult(intent, 1);
-		
-		
-		//intent.get
-		//onActivityResult(int requestCode, intent., intent.getExtras());
-		
-		// new db
-		//db = new DatabaseHelper(getApplicationContext());
-		
-		//Login login = new Login("clientID",	"clientsecret", "accesstoken", "refreshtoken", 157856, "userid", "userpara", "timestampt");
-		//long log1 = db.createLogin(login);
-		
-		Log.d("show login1", db.getLogin(1).getAccess_token() + "c " + db.getLogin(1).getId());
-		//Log.d("show login5", db.getLogin(5).getAccess_token() + "c " + db.getLogin(5).getId());
-		//Log.d("show login6", db.getLogin(6).getAccess_token() + "c " + db.getLogin(6).getId());
-		//Log.d("show login7", db.getLogin(7).getAccess_token() + "c " + db.getLogin(7).getId());
-		
-//		 Tag tag4 = new Tag("Androidhive");
-//		 
-//	        // Inserting tags in db
-//	        long tag1_id = db.createTag(tag1);
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		String access = "";
+		try {
+		   access = db.getLogin(1).getAccess_token();
+		} catch (Exception e) {
+		}
 		db.close();
+		
+		if (access.isEmpty()) { 
+			Intent intent = new Intent(this, WebViewActivity.class);
+			intent.putExtra(
+					"Key",
+					"https://api.ihealthlabs.com:8443/OpenApiV2/OAuthv2/userauthorization/?"
+							+ "client_id="
+							+ CLIENT_ID
+							+ "&response_type=code&redirect_uri=http://erichstark.com/"
+							+ API_NAME);
+			
+			startActivityForResult(intent, 1);
+			Log.d("MainActivity", "Starting WebView");
+		} else {
+			Log.d("MainActivity", "WebView is not starting");
+		}
+		
+
+		
 		// set title
 		appTitle = navDrawerTitle = getTitle();
 
@@ -280,11 +278,12 @@ public class MainActivity extends Activity {
 		         Log.d("som v resulOK", "resultOK: " + result);
 		         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
 		         
-//					GetContacts2 getData = new GetContacts2();
-//					AsyncTask<String, String, Void> asyncGetData = getData.execute(dataUrl);
+//				 
 		         AsyncTaskLoginData getLoginData = new AsyncTaskLoginData(getApplicationContext());
-		         AsyncTask<String, Void, String[]> asyncGetLoginData = getLoginData.execute(result);
-		    
+		         AsyncTask<String, Void, Login> asyncGetLoginData = getLoginData.execute(result);
+		         
+		         
+		         
 		     }
 		     if (resultCode == RESULT_CANCELED) {    
 		         //Write your code if there's no result

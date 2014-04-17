@@ -10,22 +10,23 @@ import org.json.JSONObject;
 
 import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
 import com.erichstark.pedometer.sqlite.model.Login;
+import com.erichstark.pedometer.sqlite.model.User;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class AsyncTaskLoginData extends AsyncTask<String, Void, Login> {
+public class AsyncTaskUserData extends AsyncTask<String, Void, User> {
 
 	private Context context;
 	private DatabaseHelper db;
 
-	public AsyncTaskLoginData(Context context) {
+	public AsyncTaskUserData(Context context) {
 		this.context = context;
 	}
 
 	@Override
-	protected Login doInBackground(String... arg0) {
+	protected User doInBackground(String... arg0) {
 		// Creating service handler class instance
 		ServiceHandler sh = new ServiceHandler();
 
@@ -37,18 +38,18 @@ public class AsyncTaskLoginData extends AsyncTask<String, Void, Login> {
 		// my code
 
 		String[] str = { "", "" };
-		Login login = new Login();
+		User user = new User();
 		if (jsonStr != null) {
 			try {
 				JSONObject jObjLogin = new JSONObject(jsonStr);
 				
 				
-				login.setAccess_token(jObjLogin.getString("AccessToken"));
-				login.setRefresh_token(jObjLogin.getString("RefreshToken"));
-				login.setExpires(jObjLogin.getInt("Expires"));
-				login.setUser_id(jObjLogin.getString("UserID"));
-				login.setUser_para(jObjLogin.getString("client_para"));
-				login.setTimestamp(getCurrentTimeStamp());
+//				login.setAccess_token(jObjLogin.getString("AccessToken"));
+//				login.setRefresh_token(jObjLogin.getString("RefreshToken"));
+//				login.setExpires(jObjLogin.getInt("Expires"));
+//				login.setUser_id(jObjLogin.getString("UserID"));
+//				login.setUser_para(jObjLogin.getString("client_para"));
+//				login.setTimestamp(getCurrentTimeStamp());
 				
 
 				
@@ -56,11 +57,12 @@ public class AsyncTaskLoginData extends AsyncTask<String, Void, Login> {
 				e.printStackTrace();
 			}
 		}
-		return login;
+		//return login;
+		return user;
 	}
 
 	@Override
-	protected void onPostExecute(Login result) {
+	protected void onPostExecute(User result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
@@ -79,7 +81,7 @@ public class AsyncTaskLoginData extends AsyncTask<String, Void, Login> {
 		// AsyncTask<String, String, Void> asyncGetData =
 		// getData.execute(dataUrl);
 		db = new DatabaseHelper(context);
-		long logee = db.createLogin(result);
+		//long logee = db.createLogin(result);
 
 		
 
