@@ -1,12 +1,9 @@
 package com.erichstark.pedometer;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
+import com.erichstark.pedometer.drawer.UserProfileFragment;
 import com.erichstark.pedometer.oauth2.AsyncTaskLoginData;
 import com.erichstark.pedometer.oauth2.WebViewActivity;
 import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
@@ -14,6 +11,7 @@ import com.erichstark.pedometer.sqlite.model.Login;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -27,15 +25,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	
+
 	public static final String CLIENT_ID = "417483e552844d0a8bd37fb7166401a0";
 	public static final String CLIENT_SECRET = "4f6afba3cf624833807e9f64ca2638d6";
-	public static final String API_NAME = 
-			"&APIName=OpenApiActivity+OpenApiBG+OpenApiSleep+OpenApiUserInfo+OpenApiWeight&RequiredAPIName=OpenApiActivity+OpenApiBG+OpenApiSleep+OpenApiUserInfo+OpenApiWeight";
+	public static final String API_NAME = "&APIName=OpenApiActivity+OpenApiBG+OpenApiSleep+OpenApiUserInfo+OpenApiWeight&RequiredAPIName=OpenApiActivity+OpenApiBG+OpenApiSleep+OpenApiUserInfo+OpenApiWeight";
 
 	private DrawerLayout drawerLayout;
 	private ListView drawerListView;
@@ -53,7 +52,7 @@ public class MainActivity extends Activity {
 
 	private ArrayList<NavigationDrawerItem> navDrawerItems;
 	private NavigationDrawerListAdapter navDrawerAdapter;
-	
+
 	// DATABASE
 	private DatabaseHelper db;
 
@@ -62,27 +61,32 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+
 		db = new DatabaseHelper(getApplicationContext());
-		
-//		SimpleDateFormat dateFormat = new SimpleDateFormat(
-//                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-//        Date date = new Date();
-//        dateFormat.format(date);
-        
-//		Log.d("show login1 before: ", db.getLogin(1).getAccess_token() + "c " + db.getLogin(1).getId());
-//		
-//		Login logg = new Login(1,"clID","clSecret","accessTok","refresToke",7501,"usrID", "usrPara","cas");
-//		db.updateLogin(logg);
-//		Log.d("show login1 after:", db.getLogin(1).getAccess_token() + "c " + db.getLogin(1).getId());
-		
+
+		// SimpleDateFormat dateFormat = new SimpleDateFormat(
+		// "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+		// Date date = new Date();
+		// dateFormat.format(date);
+
+		// Log.d("show login1 before: ", db.getLogin(1).getAccess_token() + "c "
+		// + db.getLogin(1).getId());
+		//
+		// Login logg = new
+		// Login(1,"clID","clSecret","accessTok","refresToke",7501,"usrID",
+		// "usrPara","cas");
+		// db.updateLogin(logg);
+		// Log.d("show login1 after:", db.getLogin(1).getAccess_token() + "c " +
+		// db.getLogin(1).getId());
+
 		String access = "";
 		try {
-		   access = db.getLogin(1).getAccess_token();
+			access = db.getLogin(1).getAccess_token();
 		} catch (Exception e) {
 		}
 		db.close();
-		
-		if (access.isEmpty()) { 
+
+		if (access.isEmpty()) {
 			Intent intent = new Intent(this, WebViewActivity.class);
 			intent.putExtra(
 					"Key",
@@ -91,15 +95,13 @@ public class MainActivity extends Activity {
 							+ CLIENT_ID
 							+ "&response_type=code&redirect_uri=http://erichstark.com/"
 							+ API_NAME);
-			
+
 			startActivityForResult(intent, 1);
 			Log.d("MainActivity", "Starting WebView");
 		} else {
 			Log.d("MainActivity", "WebView is not starting");
 		}
-		
 
-		
 		// set title
 		appTitle = navDrawerTitle = getTitle();
 
@@ -137,18 +139,28 @@ public class MainActivity extends Activity {
 
 		// free icons from memory
 		navMenuIcons.recycle();
+		
+		drawerListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				displayView(position);
+			}
+		});
 
 		// set navigation drawer list adapter
 		navDrawerAdapter = new NavigationDrawerListAdapter(
 				getApplicationContext(), navDrawerItems);
 		drawerListView.setAdapter(navDrawerAdapter);
+		
+
 
 		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 
-		abDrawerToggle = new ActionBarDrawerToggle(this, 
-				drawerLayout,
+		abDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
 				R.drawable.ic_drawer, // nav menu toggle icon
 				R.string.app_name, // nav drawer open
 				R.string.app_name) { // nav drawer close
@@ -166,18 +178,76 @@ public class MainActivity extends Activity {
 			}
 
 		};
-		
+
 		drawerLayout.setDrawerListener(abDrawerToggle);
 
 		if (savedInstanceState == null) {
 			// getFragmentManager().beginTransaction()
 			// .add(R.id.container, new PlaceholderFragment()).commit();
-			// zavolam custom displayView(0);
+			displayView(0);
 		}
 		
+
+
 		Log.d("KONIEC", "koniec oncreate");
 
 	}
+
+//	private class SlideMenuClickListener implements
+//			ListView.OnItemClickListener {
+//		@Override
+//		public void onItemClick(AdapterView<?> parent, View view, int position,
+//				long id) {
+//			// display view for selected nav drawer item
+//			displayView(position);
+//		}
+//	}
+	
+	/**
+     * Diplaying fragment view for selected nav drawer list item
+     * */
+    private void displayView(int position) {
+        // update the main content by replacing fragments
+        Fragment fragment = null;
+        switch (position) {
+        case 0:
+            fragment = new UserProfileFragment();
+            break;
+//        case 1:
+//            fragment = new FindPeopleFragment();
+//            break;
+//        case 2:
+//            fragment = new PhotosFragment();
+//            break;
+//        case 3:
+//            fragment = new CommunityFragment();
+//            break;
+//        case 4:
+//            fragment = new PagesFragment();
+//            break;
+//        case 5:
+//            fragment = new WhatsHotFragment();
+//            break;
+ 
+        default:
+            break;
+        }
+ 
+        if (fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frame_container, fragment).commit();
+ 
+            // update selected item and title, then close the drawer
+            drawerListView.setItemChecked(position, true);
+            drawerListView.setSelection(position);
+            setTitle(navMenuTitles[position]);
+            drawerLayout.closeDrawer(drawerListView);
+        } else {
+            // error in creating fragment
+            Log.e("MainActivity", "Error in creating fragment");
+        }
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -192,63 +262,60 @@ public class MainActivity extends Activity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-//		int id = item.getItemId();
-//		if (id == R.id.action_settings) {
-//			return true;
-//		}
-//		return super.onOptionsItemSelected(item);
-		
-		
+		// int id = item.getItemId();
+		// if (id == R.id.action_settings) {
+		// return true;
+		// }
+		// return super.onOptionsItemSelected(item);
+
 		if (abDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle action bar actions click
-        switch (item.getItemId()) {
-        case R.id.action_settings:
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
-        }
+			return true;
+		}
+		// Handle action bar actions click
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
-	
+
 	/***
-     * Called when invalidateOptionsMenu() is triggered
-     */
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // if nav drawer is opened, hide the action items
-        boolean drawerOpen = drawerLayout.isDrawerOpen(drawerListView);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
-        return super.onPrepareOptionsMenu(menu);
-    }
-    
-    @Override
-    public void setTitle(CharSequence title) {
-        appTitle = title;
-        getActionBar().setTitle(appTitle);
-    }
-    
-    
-    /**
-     * When using the ActionBarDrawerToggle, you must call it during
-     * onPostCreate() and onConfigurationChanged()...
-     */
- 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        abDrawerToggle.syncState();
-    }
- 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
-        abDrawerToggle.onConfigurationChanged(newConfig);
-    }
-    
-    
+	 * Called when invalidateOptionsMenu() is triggered
+	 */
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// if nav drawer is opened, hide the action items
+		boolean drawerOpen = drawerLayout.isDrawerOpen(drawerListView);
+		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
+	public void setTitle(CharSequence title) {
+		appTitle = title;
+		getActionBar().setTitle(appTitle);
+	}
+
+	/**
+	 * When using the ActionBarDrawerToggle, you must call it during
+	 * onPostCreate() and onConfigurationChanged()...
+	 */
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		abDrawerToggle.syncState();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		// Pass any configuration change to the drawer toggls
+		abDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
@@ -265,32 +332,30 @@ public class MainActivity extends Activity {
 			return rootView;
 		}
 	}
-	
-	
+
 	// vrati mi hodnotu z webview
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-		  if (requestCode == 1) {
+		if (requestCode == 1) {
 
-		     if(resultCode == RESULT_OK){      
-		         String result=data.getStringExtra("result");   
-		         Log.d("som v resulOK", "resultOK: " + result);
-		         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-		         
-//				 
-		         AsyncTaskLoginData getLoginData = new AsyncTaskLoginData(getApplicationContext());
-		         AsyncTask<String, Void, Login> asyncGetLoginData = getLoginData.execute(result);
-		         
-		         
-		         
-		     }
-		     if (resultCode == RESULT_CANCELED) {    
-		         //Write your code if there's no result
-		    	 Log.d("som v resul cancel", "result CANCEL");
-		     }
-		  }
+			if (resultCode == RESULT_OK) {
+				String result = data.getStringExtra("result");
+				Log.d("som v resulOK", "resultOK: " + result);
+				Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+
+				//
+				AsyncTaskLoginData getLoginData = new AsyncTaskLoginData(
+						getApplicationContext());
+				AsyncTask<String, Void, Login> asyncGetLoginData = getLoginData
+						.execute(result);
+
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+				Log.d("som v resul cancel", "result CANCEL");
+			}
 		}
-
+	}
 
 }
