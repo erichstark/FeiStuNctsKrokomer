@@ -29,5 +29,10 @@
     
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
+    <string name="fotka_uzivatela">Fotka užívateľa</string>
+    <string name="login_name">Login:</string>
+    <string name="gender">Pohlavie:</string>
+    <string name="height">Výška:</string>
+    <string name="weight">Váha</string>
  
 </resources>

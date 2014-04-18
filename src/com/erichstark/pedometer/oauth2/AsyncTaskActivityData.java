@@ -21,8 +21,6 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, ActivityRepor
 
 	private Context context;
 	private DatabaseHelper db;
-	private String accessToken;
-	private String userID;
 
 	public AsyncTaskActivityData(Context context) {
 		this.context = context;
@@ -35,24 +33,23 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, ActivityRepor
 		
 		
 
-		db = new DatabaseHelper(context);
-		accessToken = db.getLogin(1).getAccess_token();
-		userID = db.getLogin(1).getUser_id();
+//		db = new DatabaseHelper(context);
+
 		
 		// Making a request to url and getting response
 		String jsonStr = sh.makeServiceCall(arg0[0], ServiceHandler.GET);
 		
-		Log.d("Response: ", "> " + jsonStr);
+		Log.d("Response ACTIVITTY: ", "> " + jsonStr);
 		
-		 String dataUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
-		 + userID
-		 + "/activity.json/?client_id="
-		 + MainActivity.CLIENT_ID
-		 + "&client_secret="
-		 + MainActivity.CLIENT_SECRET
-		 + "&redirect_uri=http://erichstark.com&access_token="
-		 + accessToken
-		 + "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
+//		 String dataUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+//		 + db.getLogin(1).getUser_id()
+//		 + "/activity.json/?client_id="
+//		 + MainActivity.CLIENT_ID
+//		 + "&client_secret="
+//		 + MainActivity.CLIENT_SECRET
+//		 + "&redirect_uri=http://erichstark.com&access_token="
+//		 + db.getLogin(1).getAccess_token()
+//		 + "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
 		
 		
 

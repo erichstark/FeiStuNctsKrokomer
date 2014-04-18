@@ -52,17 +52,28 @@ public final class R {
         public static final int list_item_bg_normal=0x7f02000a;
         public static final int list_item_bg_pressed=0x7f02000b;
         public static final int list_selector=0x7f02000c;
+        public static final int user_image=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0008;
+        public static final int action_settings=0x7f0a0012;
+        public static final int btn_fill_user=0x7f0a0010;
         public static final int counter=0x7f0a0005;
         public static final int drawer_layout=0x7f0a0000;
         public static final int frame_container=0x7f0a0001;
         public static final int icon=0x7f0a0003;
         public static final int list_slidermenu=0x7f0a0002;
         public static final int title=0x7f0a0004;
-        public static final int txtLabel=0x7f0a0006;
-        public static final int webView1=0x7f0a0007;
+        public static final int tv_gender=0x7f0a000b;
+        public static final int tv_height=0x7f0a000d;
+        public static final int tv_label_gender=0x7f0a000a;
+        public static final int tv_label_height=0x7f0a000c;
+        public static final int tv_label_nickname=0x7f0a0007;
+        public static final int tv_label_weight=0x7f0a000e;
+        public static final int tv_nickname=0x7f0a0008;
+        public static final int tv_weight=0x7f0a000f;
+        public static final int userData=0x7f0a0009;
+        public static final int userImage=0x7f0a0006;
+        public static final int webView1=0x7f0a0011;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -82,6 +93,11 @@ public final class R {
         public static final int desc_list_item_icon=0x7f060004;
         public static final int drawer_close=0x7f060003;
         public static final int drawer_open=0x7f060002;
+        public static final int fotka_uzivatela=0x7f060005;
+        public static final int gender=0x7f060007;
+        public static final int height=0x7f060008;
+        public static final int login_name=0x7f060006;
+        public static final int weight=0x7f060009;
     }
     public static final class style {
         /** 

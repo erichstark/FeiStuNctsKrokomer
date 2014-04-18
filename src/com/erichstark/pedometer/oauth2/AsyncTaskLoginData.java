@@ -8,8 +8,10 @@ import java.util.Locale;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.erichstark.pedometer.MainActivity;
 import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
 import com.erichstark.pedometer.sqlite.model.Login;
+import com.erichstark.pedometer.sqlite.model.User;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -83,14 +85,27 @@ public class AsyncTaskLoginData extends AsyncTask<String, Void, Login> {
 
 		
 
+//		db.close();
+//
+//		db = new DatabaseHelper(getApplicationContext());
+		 String userUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+				 + db.getLogin(1).getUser_id()
+				 + ".json/?client_id="
+				 + MainActivity.CLIENT_ID
+				 + "&client_secret="
+				 + MainActivity.CLIENT_SECRET
+				 + "&redirect_uri=http://erichstark.com&access_token="
+				 + db.getLogin(1).getAccess_token()
+				 +
+				 "&sc=17979dfde8cb4c30813ad612d0b974e9&sv=54820bbf0a80476e9718b76389ad40cd";
+		
 		db.close();
-
-		//
-		// Intent returnIntent = new Intent();
-		// returnIntent.putExtra("result", 1);
-		// setResult(RESULT_OK,returnIntent);
-		// //
-		// finish();
+		
+		AsyncTaskUserData getUserData = new AsyncTaskUserData(context);
+		AsyncTask<String, Void, User> asyncGetUserData = getUserData
+				.execute(userUrl);
+		
+		Log.d("MainActivity linka: ", "" + userUrl);
 	}
 
 	public String getCurrentTimeStamp() {

@@ -4,8 +4,8 @@ package com.erichstark.pedometer.sqlite.model;
 public class User {
 	int id;
 	int currentRecordCount;
-	int heightUnit;
-	int weightUnit;
+	int heightUnit; //ok
+	int weightUnit; //ok
 	String nextPageUrl;
 	String prevPageUrl;
 	int pageLength;

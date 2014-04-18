@@ -41,17 +41,17 @@ public class AsyncTaskUserData extends AsyncTask<String, Void, User> {
 		User user = new User();
 		if (jsonStr != null) {
 			try {
-				JSONObject jObjLogin = new JSONObject(jsonStr);
+				JSONObject jObjUser = new JSONObject(jsonStr);
 				
-				
-//				login.setAccess_token(jObjLogin.getString("AccessToken"));
-//				login.setRefresh_token(jObjLogin.getString("RefreshToken"));
-//				login.setExpires(jObjLogin.getInt("Expires"));
-//				login.setUser_id(jObjLogin.getString("UserID"));
-//				login.setUser_para(jObjLogin.getString("client_para"));
-//				login.setTimestamp(getCurrentTimeStamp());
-				
-
+				user.setDateOfBirth(jObjUser.getString("dateofbirth"));
+				user.setGender(jObjUser.getString("gender"));
+				user.setHeight((float) jObjUser.getDouble("height"));
+				user.setHeightUnit(jObjUser.getInt("HeightUnit"));
+				user.setWeight((float) jObjUser.getDouble("weight"));
+				user.setWeightUnit(jObjUser.getInt("WeightUnit"));
+				user.setLogo(jObjUser.getString("logo"));
+				user.setNickname(jObjUser.getString("nickname"));
+				user.setUserid(jObjUser.getString("userid"));
 				
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -66,22 +66,22 @@ public class AsyncTaskUserData extends AsyncTask<String, Void, User> {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
-		// String dataUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
-		// + userID
-		// + "/activity.json/?client_id="
-		// + appId
-		// + "&client_secret="
-		// + appSecret
-		// + "&redirect_uri=http://erichstark.com&access_token="
-		// + strtoken
-		// +
-		// "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
-		//
+//		 String dataUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+//		 + userID
+//		 + "/activity.json/?client_id="
+//		 + appId
+//		 + "&client_secret="
+//		 + appSecret
+//		 + "&redirect_uri=http://erichstark.com&access_token="
+//		 + strtoken
+//		 +
+//		 "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
+//		
 		// GetContacts2 getData = new GetContacts2();
 		// AsyncTask<String, String, Void> asyncGetData =
 		// getData.execute(dataUrl);
 		db = new DatabaseHelper(context);
-		//long logee = db.createLogin(result);
+		long logee = db.createUser(result);
 
 		
 

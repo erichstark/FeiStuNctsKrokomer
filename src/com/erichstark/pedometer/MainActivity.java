@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
 import com.erichstark.pedometer.drawer.UserProfileFragment;
+import com.erichstark.pedometer.oauth2.AsyncTaskActivityData;
 import com.erichstark.pedometer.oauth2.AsyncTaskLoginData;
+import com.erichstark.pedometer.oauth2.AsyncTaskUserData;
 import com.erichstark.pedometer.oauth2.WebViewActivity;
 import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
+import com.erichstark.pedometer.sqlite.model.ActivityReport;
 import com.erichstark.pedometer.sqlite.model.Login;
+import com.erichstark.pedometer.sqlite.model.User;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -84,6 +88,7 @@ public class MainActivity extends Activity {
 			access = db.getLogin(1).getAccess_token();
 		} catch (Exception e) {
 		}
+		Log.d("acs::::::::", access);
 		db.close();
 
 		if (access.isEmpty()) {
@@ -101,6 +106,23 @@ public class MainActivity extends Activity {
 		} else {
 			Log.d("MainActivity", "WebView is not starting");
 		}
+		
+		db = new DatabaseHelper(getApplicationContext());
+		// test activity report
+		 String activityUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+		 + db.getLogin(1).getUser_id()
+		 + "/activity.json/?client_id="
+		 + MainActivity.CLIENT_ID
+		 + "&client_secret="
+		 + MainActivity.CLIENT_SECRET
+		 + "&redirect_uri=http://erichstark.com&access_token="
+		 + db.getLogin(1).getAccess_token()
+		 + "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
+		db.close();
+		
+		AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(getApplicationContext());
+		AsyncTask<String, Void, ActivityReport> asyncGetActivityData = getActivityData.execute(activityUrl);
+		
 
 		// set title
 		appTitle = navDrawerTitle = getTitle();
@@ -187,7 +209,6 @@ public class MainActivity extends Activity {
 			displayView(0);
 		}
 		
-
 
 		Log.d("KONIEC", "koniec oncreate");
 
@@ -349,6 +370,26 @@ public class MainActivity extends Activity {
 						getApplicationContext());
 				AsyncTask<String, Void, Login> asyncGetLoginData = getLoginData
 						.execute(result);
+				
+//				db = new DatabaseHelper(getApplicationContext());
+//				 String userUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+//						 + db.getLogin(1).getUser_id()
+//						 + ".json/?client_id="
+//						 + CLIENT_ID
+//						 + "&client_secret="
+//						 + CLIENT_SECRET
+//						 + "&redirect_uri=http://erichstark.com&access_token="
+//						 + db.getLogin(1).getAccess_token()
+//						 +
+//						 "&sc=17979dfde8cb4c30813ad612d0b974e9&sv=54820bbf0a80476e9718b76389ad40cd";
+//				
+//				db.close();
+//				
+//				AsyncTaskUserData getUserData = new AsyncTaskUserData(getApplicationContext());
+//				AsyncTask<String, Void, User> asyncGetUserData = getUserData
+//						.execute(userUrl);
+//				
+//				Log.d("MainActivity linka: ", "" + userUrl);
 
 			}
 			if (resultCode == RESULT_CANCELED) {
