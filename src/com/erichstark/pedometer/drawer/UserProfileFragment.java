@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class UserProfileFragment extends Fragment {
 	
@@ -68,7 +69,8 @@ public class UserProfileFragment extends Fragment {
 				float s_height = db.getUser(1).getHeight();
 				float s_weight = db.getUser(1).getWeight();
 				
-				if (s_gender.compareTo("male") == 0) {
+				//Toast.makeText(getActivity(), "" + s_gender, Toast.LENGTH_LONG).show();
+				if (s_gender.toLowerCase().compareTo("male") == 0) {
 					gender.setText("Muž");
 				} else {
 					gender.setText("Žena");
@@ -80,6 +82,7 @@ public class UserProfileFragment extends Fragment {
 				weight.setText(Float.toString(s_weight));				
 			}
 		});
+		db.close();
 		
 		return rootView;
 	}

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,6 +60,7 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, ActivityRepor
 			try {
 				JSONObject jObjLogin = new JSONObject(jsonStr);
 				
+				JSONArray jData = jObjLogin.getJSONArray("ARDataList");
 				
 //				login.setAccess_token(jObjLogin.getString("AccessToken"));
 //				login.setRefresh_token(jObjLogin.getString("RefreshToken"));
@@ -67,6 +69,24 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, ActivityRepor
 //				login.setUser_para(jObjLogin.getString("client_para"));
 //				login.setTimestamp(getCurrentTimeStamp());
 				
+				db = new DatabaseHelper(context);
+				// looping through All Contacts
+                for (int i = 0; i < jData.length(); i++) {
+                    JSONObject c = jData.getJSONObject(i);
+                    
+                    ActivityReport report = new ActivityReport();
+                    report.setCalories(c.getInt("Calories"));
+                    report.setDistanceTraveled((float) c.getDouble("DistanceTraveled"));
+                    report.setMdate(c.getString("MDate"));
+                    report.setSteps(c.getString("Steps"));
+
+                    long juju = db.createActivityReport(report);
+                    // adding contact to contact list
+                    //contactList.add(contact);
+                    //Log.d("activityReport vypis: ",""+ db.getActivityReport(juju).getCalories() +" : " +db.getActivityReport(juju).getId());
+                }
+                
+				db.close();
 
 				
 			} catch (JSONException e) {

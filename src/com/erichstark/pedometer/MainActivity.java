@@ -3,6 +3,7 @@ package com.erichstark.pedometer;
 import java.util.ArrayList;
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
+import com.erichstark.pedometer.drawer.StepsHistoryFragment;
 import com.erichstark.pedometer.drawer.UserProfileFragment;
 import com.erichstark.pedometer.oauth2.AsyncTaskActivityData;
 import com.erichstark.pedometer.oauth2.AsyncTaskLoginData;
@@ -67,7 +68,6 @@ public class MainActivity extends Activity {
 		
 
 		db = new DatabaseHelper(getApplicationContext());
-
 		// SimpleDateFormat dateFormat = new SimpleDateFormat(
 		// "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 		// Date date = new Date();
@@ -107,6 +107,7 @@ public class MainActivity extends Activity {
 			Log.d("MainActivity", "WebView is not starting");
 		}
 		
+		if (access.isEmpty()) {
 		db = new DatabaseHelper(getApplicationContext());
 		// test activity report
 		 String activityUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
@@ -122,7 +123,10 @@ public class MainActivity extends Activity {
 		
 		AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(getApplicationContext());
 		AsyncTask<String, Void, ActivityReport> asyncGetActivityData = getActivityData.execute(activityUrl);
-		
+		Log.d("MainActivity", "AsyncTask activity IS starting");
+		} else {
+			Log.d("MainActivity", "AsyncTask activity is not starting");
+		}
 
 		// set title
 		appTitle = navDrawerTitle = getTitle();
@@ -158,6 +162,12 @@ public class MainActivity extends Activity {
 		// siesty, prida sa aj counter
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
 				5, -1), navMenuTitles[5], "15", true));
+		
+		// free
+		navDrawerItems.add(new NavigationDrawerItem(-1, ""));
+		
+		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
+				5, -1), navMenuTitles[6]));
 
 		// free icons from memory
 		navMenuIcons.recycle();
@@ -235,11 +245,11 @@ public class MainActivity extends Activity {
             fragment = new UserProfileFragment();
             break;
 //        case 1:
-//            fragment = new FindPeopleFragment();
+//            fragment = new StepsHistoryFragment();
 //            break;
-//        case 2:
-//            fragment = new PhotosFragment();
-//            break;
+        case 2:
+            fragment = new StepsHistoryFragment();
+            break;
 //        case 3:
 //            fragment = new CommunityFragment();
 //            break;

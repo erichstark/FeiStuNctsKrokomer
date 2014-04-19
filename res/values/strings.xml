@@ -14,6 +14,7 @@
         <item >Graf chôdze</item>
         <item >Kvalita spánku</item>
         <item >Graf spánku</item>
+        <item >Odhlásenie</item>
     </string-array>
      
     <!-- Nav Drawer List Item Icons -->
@@ -34,5 +35,9 @@
     <string name="gender">Pohlavie:</string>
     <string name="height">Výška:</string>
     <string name="weight">Váha</string>
+    <string name="label_steps">Kroky</string>
+    <string name="label_distance">Vzdialenosť</string>
+    <string name="label_calories">Kalórie</string>
+    <string name="step_icon">Step Icon</string>
  
 </resources>
