@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/summary_first"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <ImageView
+            android:id="@+id/summary_img_steps"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:src="@drawable/step_feet_max" />
+
+        <TextView
+            android:id="@+id/tv_summary_steps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/summary_img_steps"
+            android:text="221548"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/tv_summary_steps_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_summary_steps"
+            android:layout_below="@+id/tv_summary_steps"
+            android:text="@string/summary_steps_label"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <RelativeLayout
+        android:id="@+id/summary_second"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <ImageView
+            android:id="@+id/summary_img_distance"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:src="@drawable/step_distance_max" />
+
+        <TextView
+            android:id="@+id/tv_summary_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/summary_img_distance"
+            android:layout_toRightOf="@+id/summary_img_distance"
+            android:text="18,62"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/tv_summary_distance_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_summary_distance"
+            android:layout_marginBottom="20dp"
+            android:layout_toRightOf="@+id/summary_img_distance"
+            android:text="@string/summary_distance_label"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <RelativeLayout
+        android:id="@+id/summary_third"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <ImageView
+            android:id="@+id/summary_img_calories"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:src="@drawable/step_burn_max" />
+
+        <TextView
+            android:id="@+id/tv_summary_calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/summary_img_calories"
+            android:layout_toRightOf="@+id/summary_img_calories"
+            android:text="159987"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/tv_summary_calories_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_summary_calories"
+            android:layout_marginBottom="20dp"
+            android:layout_toRightOf="@+id/summary_img_calories"
+            android:text="@string/summary_calories_label"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+</LinearLayout>

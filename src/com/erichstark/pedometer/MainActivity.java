@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
 import com.erichstark.pedometer.drawer.StepsHistoryFragment;
+import com.erichstark.pedometer.drawer.SummaryFragment;
 import com.erichstark.pedometer.drawer.UserProfileFragment;
 import com.erichstark.pedometer.oauth2.AsyncTaskActivityData;
 import com.erichstark.pedometer.oauth2.AsyncTaskLoginData;
@@ -107,26 +108,26 @@ public class MainActivity extends Activity {
 			Log.d("MainActivity", "WebView is not starting");
 		}
 		
-		if (access.isEmpty()) {
-		db = new DatabaseHelper(getApplicationContext());
-		// test activity report
-		 String activityUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
-		 + db.getLogin(1).getUser_id()
-		 + "/activity.json/?client_id="
-		 + MainActivity.CLIENT_ID
-		 + "&client_secret="
-		 + MainActivity.CLIENT_SECRET
-		 + "&redirect_uri=http://erichstark.com&access_token="
-		 + db.getLogin(1).getAccess_token()
-		 + "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
-		db.close();
-		
-		AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(getApplicationContext());
-		AsyncTask<String, Void, ActivityReport> asyncGetActivityData = getActivityData.execute(activityUrl);
-		Log.d("MainActivity", "AsyncTask activity IS starting");
-		} else {
-			Log.d("MainActivity", "AsyncTask activity is not starting");
-		}
+//		if (access.isEmpty()) {
+//		db = new DatabaseHelper(getApplicationContext());
+//		// test activity report
+//		 String activityUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+//		 + db.getLogin(1).getUser_id()
+//		 + "/activity.json/?client_id="
+//		 + MainActivity.CLIENT_ID
+//		 + "&client_secret="
+//		 + MainActivity.CLIENT_SECRET
+//		 + "&redirect_uri=http://erichstark.com&access_token="
+//		 + db.getLogin(1).getAccess_token()
+//		 + "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
+//		db.close();
+//		
+//		AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(getApplicationContext());
+//		AsyncTask<String, Void, ActivityReport> asyncGetActivityData = getActivityData.execute(activityUrl);
+//		Log.d("MainActivity", "AsyncTask activity IS starting");
+//		} else {
+//			Log.d("MainActivity", "AsyncTask activity is not starting");
+//		}
 
 		// set title
 		appTitle = navDrawerTitle = getTitle();
@@ -224,15 +225,6 @@ public class MainActivity extends Activity {
 
 	}
 
-//	private class SlideMenuClickListener implements
-//			ListView.OnItemClickListener {
-//		@Override
-//		public void onItemClick(AdapterView<?> parent, View view, int position,
-//				long id) {
-//			// display view for selected nav drawer item
-//			displayView(position);
-//		}
-//	}
 	
 	/**
      * Diplaying fragment view for selected nav drawer list item
@@ -244,9 +236,9 @@ public class MainActivity extends Activity {
         case 0:
             fragment = new UserProfileFragment();
             break;
-//        case 1:
-//            fragment = new StepsHistoryFragment();
-//            break;
+        case 1:
+            fragment = new SummaryFragment();
+            break;
         case 2:
             fragment = new StepsHistoryFragment();
             break;
@@ -276,7 +268,7 @@ public class MainActivity extends Activity {
             drawerLayout.closeDrawer(drawerListView);
         } else {
             // error in creating fragment
-            Log.e("MainActivity", "Error in creating fragment");
+            Log.e("Log: MainActivity", "Error in creating fragment");
         }
     }
 
@@ -347,22 +339,22 @@ public class MainActivity extends Activity {
 		abDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			return rootView;
-		}
-	}
+//	/**
+//	 * A placeholder fragment containing a simple view.
+//	 */
+//	public static class PlaceholderFragment extends Fragment {
+//
+//		public PlaceholderFragment() {
+//		}
+//
+//		@Override
+//		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//				Bundle savedInstanceState) {
+//			View rootView = inflater.inflate(R.layout.fragment_main, container,
+//					false);
+//			return rootView;
+//		}
+//	}
 
 	// vrati mi hodnotu z webview
 	@Override

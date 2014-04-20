@@ -9,7 +9,7 @@
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item >Užívateľ</item>
-        <item >Sumarizácia</item>
+        <item >Prehľad</item>
         <item >História chôdze</item>
         <item >Graf chôdze</item>
         <item >Kvalita spánku</item>
@@ -39,5 +39,8 @@
     <string name="label_distance">Vzdialenosť</string>
     <string name="label_calories">Kalórie</string>
     <string name="step_icon">Step Icon</string>
+    <string name="summary_steps_label">krokov</string>
+    <string name="summary_distance_label">kilometrov</string>
+    <string name="summary_calories_label">kcal</string>
  
 </resources>

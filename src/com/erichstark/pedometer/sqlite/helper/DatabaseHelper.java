@@ -20,7 +20,7 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 	// database version - minimum 1
-	private static final int DATABASE_VERSION = 5;
+	private static final int DATABASE_VERSION = 6;
 
 	// database name
 	private static final String DATABASE_NAME = "ncts_pedometer.db";
