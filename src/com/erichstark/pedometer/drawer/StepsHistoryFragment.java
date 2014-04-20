@@ -12,10 +12,16 @@ import com.erichstark.pedometer.sqlite.model.ActivityReport;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class StepsHistoryFragment extends Fragment {
 
@@ -35,6 +41,7 @@ public class StepsHistoryFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_steps_history,
 				container, false);
 
+				
 		db = new DatabaseHelper(getActivity());
 
 		lv = (ListView) rootView.findViewById(R.id.step_listView);
@@ -63,9 +70,24 @@ public class StepsHistoryFragment extends Fragment {
 					.toString(distance), 0, Integer.toString(calories)));
 		}
 
+		db.close();
+		
 		adapter = new StepsAdapter(getActivity().getApplicationContext(), steps);
 		lv.setAdapter(adapter);
+		
+		lv.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				adapter = new StepsAdapter(getActivity().getApplicationContext(), steps);
+				lv.setAdapter(adapter);
+				Toast.makeText(getActivity(), R.string.list_of_items_updated, Toast.LENGTH_LONG).show();				
+			}
+		});
+		
+		
 		return rootView;
 	}
 

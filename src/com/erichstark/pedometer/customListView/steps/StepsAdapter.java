@@ -78,5 +78,9 @@ public class StepsAdapter extends BaseAdapter {
         return convertView;
 	
 	}
+	
+	public void updateView() {
+		notifyDataSetChanged();
+	}
 
 }

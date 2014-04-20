@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_fragment_user"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -24,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_label_nickname"
         android:layout_toRightOf="@id/userImage"
-        android:text="mail"
         android:textSize="20sp" />
 
     <RelativeLayout
@@ -47,7 +47,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="muz"
             android:textSize="18sp" />
 
         <TextView
@@ -65,7 +64,6 @@
             android:layout_alignBaseline="@+id/tv_label_height"
             android:layout_alignBottom="@+id/tv_label_height"
             android:layout_alignLeft="@+id/tv_gender"
-            android:text="180"
             android:textSize="18sp" />
 
         <TextView
@@ -83,33 +81,9 @@
             android:layout_alignBaseline="@+id/tv_label_weight"
             android:layout_alignBottom="@+id/tv_label_weight"
             android:layout_alignLeft="@+id/tv_height"
-            android:text="80 kg"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/btn_fill_user"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_weight"
-            android:layout_marginTop="20dp"
-            android:text="Vypln" />
     </RelativeLayout>
 
-    <!--
-    <TextView
-        android:id="@+id/txtLabel"
-         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textSize="16dp"
-        android:text="Home View"/>
-     
-    <ImageView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtLabel"
-        android:src="@drawable/ic_home"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
-    -->
 
 </RelativeLayout>

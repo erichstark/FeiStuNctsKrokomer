@@ -31,7 +31,7 @@
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="fotka_uzivatela">Fotka užívateľa</string>
-    <string name="login_name">Login:</string>
+    <string name="login_name">Meno:</string>
     <string name="gender">Pohlavie:</string>
     <string name="height">Výška:</string>
     <string name="weight">Váha</string>
@@ -42,5 +42,11 @@
     <string name="summary_steps_label">krokov</string>
     <string name="summary_distance_label">kilometrov</string>
     <string name="summary_calories_label">kcal</string>
+    <string name="sync_label">Sync</string>
+    
+    
+    <string name="summary_text_changed">Prehľad bol aktualizovaný</string>
+    <string name="toast_profil_updated">Profil bol aktualizovaný</string>
+    <string name="list_of_items_updated">Zoznam bol aktualizovaný</string>
  
 </resources>

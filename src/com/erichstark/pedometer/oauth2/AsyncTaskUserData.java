@@ -8,6 +8,7 @@ import java.util.Locale;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.erichstark.pedometer.MainActivity;
 import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
 import com.erichstark.pedometer.sqlite.model.Login;
 import com.erichstark.pedometer.sqlite.model.User;
@@ -66,33 +67,31 @@ public class AsyncTaskUserData extends AsyncTask<String, Void, User> {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
-//		 String dataUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
-//		 + userID
-//		 + "/activity.json/?client_id="
-//		 + appId
-//		 + "&client_secret="
-//		 + appSecret
-//		 + "&redirect_uri=http://erichstark.com&access_token="
-//		 + strtoken
-//		 +
-//		 "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
-//		
-		// GetContacts2 getData = new GetContacts2();
-		// AsyncTask<String, String, Void> asyncGetData =
-		// getData.execute(dataUrl);
-		db = new DatabaseHelper(context);
-		long logee = db.createUser(result);
-
 		
-
+		
+		db = new DatabaseHelper(context);
+		
+		long logee = db.createUser(result);
+		
+		// test activity report
+		String activityUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+				+ db.getLogin(1).getUser_id()
+				+ "/activity.json/?client_id="
+				+ MainActivity.CLIENT_ID
+				+ "&client_secret="
+				+ MainActivity.CLIENT_SECRET
+				+ "&redirect_uri=http://erichstark.com&access_token="
+				+ db.getLogin(1).getAccess_token()
+				+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
 		db.close();
 
-		//
-		// Intent returnIntent = new Intent();
-		// returnIntent.putExtra("result", 1);
-		// setResult(RESULT_OK,returnIntent);
-		// //
-		// finish();
+		AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(context);
+		AsyncTask<String, Void, Void> asyncGetActivityData = getActivityData
+				.execute(activityUrl);
+		
+		db.close();
+
+
 	}
 
 	public String getCurrentTimeStamp() {

@@ -20,7 +20,7 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 	// database version - minimum 1
-	private static final int DATABASE_VERSION = 6;
+	private static final int DATABASE_VERSION = 7;
 
 	// database name
 	private static final String DATABASE_NAME = "ncts_pedometer.db";
@@ -143,8 +143,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
 		// create new tables
 		onCreate(db);
-
+		
 	}
+	
+	public void onLogoutDropDatabase(SQLiteDatabase db) {
+		// on upgrade drop older tables
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACTIVITY_REPORT);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_SLEEP_REPORT);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+		// create new tables
+		onCreate(db);
+	}
+	
+	
 
 	public long createLogin(Login login) {
 		SQLiteDatabase db = this.getWritableDatabase();

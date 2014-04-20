@@ -1,6 +1,12 @@
 package com.erichstark.pedometer;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import com.erichstark.pedometer.customListView.steps.StepItem;
+import com.erichstark.pedometer.customListView.steps.StepsAdapter;
+import com.erichstark.pedometer.drawer.LogoutFragment;
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
 import com.erichstark.pedometer.drawer.StepsHistoryFragment;
@@ -62,34 +68,22 @@ public class MainActivity extends Activity {
 	// DATABASE
 	private DatabaseHelper db;
 
+	// steps adapter update
+	private StepsAdapter stepsAdapter;
+	private ListView lvSteps;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
 
 		db = new DatabaseHelper(getApplicationContext());
-		// SimpleDateFormat dateFormat = new SimpleDateFormat(
-		// "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-		// Date date = new Date();
-		// dateFormat.format(date);
-
-		// Log.d("show login1 before: ", db.getLogin(1).getAccess_token() + "c "
-		// + db.getLogin(1).getId());
-		//
-		// Login logg = new
-		// Login(1,"clID","clSecret","accessTok","refresToke",7501,"usrID",
-		// "usrPara","cas");
-		// db.updateLogin(logg);
-		// Log.d("show login1 after:", db.getLogin(1).getAccess_token() + "c " +
-		// db.getLogin(1).getId());
 
 		String access = "";
 		try {
 			access = db.getLogin(1).getAccess_token();
 		} catch (Exception e) {
 		}
-		Log.d("acs::::::::", access);
 		db.close();
 
 		if (access.isEmpty()) {
@@ -107,24 +101,26 @@ public class MainActivity extends Activity {
 		} else {
 			Log.d("MainActivity", "WebView is not starting");
 		}
-		
+
 //		if (access.isEmpty()) {
-//		db = new DatabaseHelper(getApplicationContext());
-//		// test activity report
-//		 String activityUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
-//		 + db.getLogin(1).getUser_id()
-//		 + "/activity.json/?client_id="
-//		 + MainActivity.CLIENT_ID
-//		 + "&client_secret="
-//		 + MainActivity.CLIENT_SECRET
-//		 + "&redirect_uri=http://erichstark.com&access_token="
-//		 + db.getLogin(1).getAccess_token()
-//		 + "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
-//		db.close();
-//		
-//		AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(getApplicationContext());
-//		AsyncTask<String, Void, ActivityReport> asyncGetActivityData = getActivityData.execute(activityUrl);
-//		Log.d("MainActivity", "AsyncTask activity IS starting");
+//			db = new DatabaseHelper(getApplicationContext());
+//			// test activity report
+//			String activityUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+//					+ db.getLogin(1).getUser_id()
+//					+ "/activity.json/?client_id="
+//					+ MainActivity.CLIENT_ID
+//					+ "&client_secret="
+//					+ MainActivity.CLIENT_SECRET
+//					+ "&redirect_uri=http://erichstark.com&access_token="
+//					+ db.getLogin(1).getAccess_token()
+//					+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
+//			db.close();
+//
+//			AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(
+//					this);
+//			AsyncTask<String, Void, Void> asyncGetActivityData = getActivityData
+//					.execute(activityUrl);
+//			Log.d("MainActivity", "AsyncTask activity is starting");
 //		} else {
 //			Log.d("MainActivity", "AsyncTask activity is not starting");
 //		}
@@ -156,23 +152,20 @@ public class MainActivity extends Activity {
 				2, -1), navMenuTitles[2]));
 		// stvrty , prida sa aj counter
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
-				3, -1), navMenuTitles[3], "10", true));
+				3, -1), navMenuTitles[3], "0", true));
 		// piaty
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
 				4, -1), navMenuTitles[4]));
 		// siesty, prida sa aj counter
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
-				5, -1), navMenuTitles[5], "15", true));
-		
-		// free
-		navDrawerItems.add(new NavigationDrawerItem(-1, ""));
-		
+				5, -1), navMenuTitles[5], "0", true));
+
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
 				5, -1), navMenuTitles[6]));
 
 		// free icons from memory
 		navMenuIcons.recycle();
-		
+
 		drawerListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -186,8 +179,6 @@ public class MainActivity extends Activity {
 		navDrawerAdapter = new NavigationDrawerListAdapter(
 				getApplicationContext(), navDrawerItems);
 		drawerListView.setAdapter(navDrawerAdapter);
-		
-
 
 		// enabling action bar app icon and behaving it as toggle button
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -217,60 +208,60 @@ public class MainActivity extends Activity {
 		if (savedInstanceState == null) {
 			// getFragmentManager().beginTransaction()
 			// .add(R.id.container, new PlaceholderFragment()).commit();
-			displayView(0);
+			displayView(1);
 		}
-		
 
-		Log.d("KONIEC", "koniec oncreate");
-
+		Log.d("MainActivity", "End of onCreate");
 	}
 
-	
 	/**
-     * Diplaying fragment view for selected nav drawer list item
-     * */
-    private void displayView(int position) {
-        // update the main content by replacing fragments
-        Fragment fragment = null;
-        switch (position) {
-        case 0:
-            fragment = new UserProfileFragment();
-            break;
-        case 1:
-            fragment = new SummaryFragment();
-            break;
-        case 2:
-            fragment = new StepsHistoryFragment();
-            break;
-//        case 3:
-//            fragment = new CommunityFragment();
-//            break;
-//        case 4:
-//            fragment = new PagesFragment();
-//            break;
-//        case 5:
-//            fragment = new WhatsHotFragment();
-//            break;
- 
-        default:
-            break;
-        }
- 
-        if (fragment != null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.frame_container, fragment).commit();
- 
-            // update selected item and title, then close the drawer
-            drawerListView.setItemChecked(position, true);
-            drawerListView.setSelection(position);
-            setTitle(navMenuTitles[position]);
-            drawerLayout.closeDrawer(drawerListView);
-        } else {
-            // error in creating fragment
-            Log.e("Log: MainActivity", "Error in creating fragment");
-        }
-    }
+	 * Diplaying fragment view for selected nav drawer list item
+	 * */
+	private void displayView(int position) {
+		// update the main content by replacing fragments
+		Fragment fragment = null;
+		switch (position) {
+		case 0:
+			fragment = new UserProfileFragment();
+			break;
+		case 1:
+			fragment = new SummaryFragment();
+			break;
+		case 2:
+			fragment = new StepsHistoryFragment();
+			break;
+		case 3:
+			// fragment = new CommunityFragment();
+			break;
+		case 4:
+			// fragment = new PagesFragment();
+			break;
+		case 5:
+			// fragment = new CommunityFragment();
+			break;
+		case 6:
+			fragment = new LogoutFragment();
+			break;
+
+		default:
+			break;
+		}
+
+		if (fragment != null) {
+			FragmentManager fragmentManager = getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.frame_container, fragment).commit();
+
+			// update selected item and title, then close the drawer
+			drawerListView.setItemChecked(position, true);
+			drawerListView.setSelection(position);
+			setTitle(navMenuTitles[position]);
+			drawerLayout.closeDrawer(drawerListView);
+		} else {
+			// error in creating fragment
+			Log.e("Log: MainActivity", "Error in creating fragment");
+		}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -297,6 +288,9 @@ public class MainActivity extends Activity {
 		// Handle action bar actions click
 		switch (item.getItemId()) {
 		case R.id.action_settings:
+			return true;
+		case R.id.synchronize:
+			synchronizeAll();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -339,22 +333,6 @@ public class MainActivity extends Activity {
 		abDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-//	/**
-//	 * A placeholder fragment containing a simple view.
-//	 */
-//	public static class PlaceholderFragment extends Fragment {
-//
-//		public PlaceholderFragment() {
-//		}
-//
-//		@Override
-//		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//				Bundle savedInstanceState) {
-//			View rootView = inflater.inflate(R.layout.fragment_main, container,
-//					false);
-//			return rootView;
-//		}
-//	}
 
 	// vrati mi hodnotu z webview
 	@Override
@@ -364,41 +342,97 @@ public class MainActivity extends Activity {
 
 			if (resultCode == RESULT_OK) {
 				String result = data.getStringExtra("result");
-				Log.d("som v resulOK", "resultOK: " + result);
-				Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-
-				//
-				AsyncTaskLoginData getLoginData = new AsyncTaskLoginData(
-						getApplicationContext());
+				
+				AsyncTaskLoginData getLoginData = new AsyncTaskLoginData(this);
 				AsyncTask<String, Void, Login> asyncGetLoginData = getLoginData
 						.execute(result);
-				
-//				db = new DatabaseHelper(getApplicationContext());
-//				 String userUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
-//						 + db.getLogin(1).getUser_id()
-//						 + ".json/?client_id="
-//						 + CLIENT_ID
-//						 + "&client_secret="
-//						 + CLIENT_SECRET
-//						 + "&redirect_uri=http://erichstark.com&access_token="
-//						 + db.getLogin(1).getAccess_token()
-//						 +
-//						 "&sc=17979dfde8cb4c30813ad612d0b974e9&sv=54820bbf0a80476e9718b76389ad40cd";
-//				
-//				db.close();
-//				
-//				AsyncTaskUserData getUserData = new AsyncTaskUserData(getApplicationContext());
-//				AsyncTask<String, Void, User> asyncGetUserData = getUserData
-//						.execute(userUrl);
-//				
-//				Log.d("MainActivity linka: ", "" + userUrl);
+
+				// db = new DatabaseHelper(getApplicationContext());
+				// String userUrl =
+				// "https://api.ihealthlabs.com:8443/openapiv2/user/"
+				// + db.getLogin(1).getUser_id()
+				// + ".json/?client_id="
+				// + CLIENT_ID
+				// + "&client_secret="
+				// + CLIENT_SECRET
+				// + "&redirect_uri=http://erichstark.com&access_token="
+				// + db.getLogin(1).getAccess_token()
+				// +
+				// "&sc=17979dfde8cb4c30813ad612d0b974e9&sv=54820bbf0a80476e9718b76389ad40cd";
+				//
+				// db.close();
+				//
+				// AsyncTaskUserData getUserData = new
+				// AsyncTaskUserData(getApplicationContext());
+				// AsyncTask<String, Void, User> asyncGetUserData = getUserData
+				// .execute(userUrl);
+				//
+				// Log.d("MainActivity linka: ", "" + userUrl);
 
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
-				Log.d("som v resul cancel", "result CANCEL");
+				Log.d("MainActivity", "in result canceled");
 			}
 		}
+	}
+
+	public void synchronizeAll() {
+		db = new DatabaseHelper(getApplicationContext());
+		// test activity report
+		String activityUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+				+ db.getLogin(1).getUser_id()
+				+ "/activity.json/?client_id="
+				+ MainActivity.CLIENT_ID
+				+ "&client_secret="
+				+ MainActivity.CLIENT_SECRET
+				+ "&redirect_uri=http://erichstark.com&access_token="
+				+ db.getLogin(1).getAccess_token()
+				+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
+		db.close();
+
+		AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(this);
+		AsyncTask<String, Void, Void> asyncGetActivityData = getActivityData
+				.execute(activityUrl);
+
+		// synchronizeActivityReport();
+
+		Log.d("MainActivity", "Synchronize event IS starting");
+	}
+
+	public void synchronizeActivityReport() {
+		db = new DatabaseHelper(this);
+
+		lvSteps = (ListView) findViewById(R.id.step_listView);
+
+		ArrayList<StepItem> steps = new ArrayList<StepItem>();
+
+		List<ActivityReport> activityReport = db.getAllActivityReports();
+		db.close();
+		int count = activityReport.size();
+
+		for (int i = 0; i < count; i++) {
+			String date_unix = activityReport.get(i).getMdate();
+			String steps_s = activityReport.get(i).getSteps();
+			float distance = activityReport.get(i).getDistanceTraveled();
+			int calories = activityReport.get(i).getCalories();
+
+			Calendar mydate = Calendar.getInstance();
+			mydate.setTimeInMillis(Long.parseLong(date_unix) * 1000);
+
+			String date = mydate.get(Calendar.DAY_OF_MONTH) + "."
+					+ mydate.get(Calendar.MONTH) + "."
+					+ mydate.get(Calendar.YEAR);
+
+			steps.add(new StepItem(date, 0, steps_s, 0, Float
+					.toString(distance), 0, Integer.toString(calories)));
+		}
+
+		steps.add(new StepItem("cucek", 0, "cucek", 0, Float.toString(1.4f), 0,
+				Integer.toString(10)));
+
+		stepsAdapter = new StepsAdapter(this, steps);
+		lvSteps.setAdapter(stepsAdapter);
 	}
 
 }
