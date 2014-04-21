@@ -81,6 +81,7 @@ public class MainActivity extends Activity {
 		String access = "";
 		try {
 			access = db.getLogin(1).getAccess_token();
+			
 		} catch (Exception e) {
 		}
 		db.close();
@@ -101,29 +102,15 @@ public class MainActivity extends Activity {
 			Log.d("MainActivity", "WebView is not starting");
 		}
 
-//		if (access.isEmpty()) {
-//			db = new DatabaseHelper(getApplicationContext());
-//			// test activity report
-//			String activityUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
-//					+ db.getLogin(1).getUser_id()
-//					+ "/activity.json/?client_id="
-//					+ MainActivity.CLIENT_ID
-//					+ "&client_secret="
-//					+ MainActivity.CLIENT_SECRET
-//					+ "&redirect_uri=http://erichstark.com&access_token="
-//					+ db.getLogin(1).getAccess_token()
-//					+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
-//			db.close();
-//
-//			AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(
-//					this);
-//			AsyncTask<String, Void, Void> asyncGetActivityData = getActivityData
-//					.execute(activityUrl);
-//			Log.d("MainActivity", "AsyncTask activity is starting");
-//		} else {
-//			Log.d("MainActivity", "AsyncTask activity is not starting");
-//		}
+		db = new DatabaseHelper(getApplicationContext());
 
+		String numberOfStepItems = "0";
+		try {
+			numberOfStepItems = Integer.toString(db.getAllActivityReports().size());
+		} catch (Exception e) {
+		}
+		db.close();
+		
 		// set title
 		appTitle = navDrawerTitle = getTitle();
 
@@ -148,16 +135,16 @@ public class MainActivity extends Activity {
 				1, -1), navMenuTitles[1]));
 		// treti
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
-				2, -1), navMenuTitles[2]));
+				2, -1), navMenuTitles[2], numberOfStepItems, true));
 		// stvrty , prida sa aj counter
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
-				3, -1), navMenuTitles[3], "0", true));
+				3, -1), navMenuTitles[3]));
 		// piaty
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
-				4, -1), navMenuTitles[4]));
+				4, -1), navMenuTitles[4], "0", true));
 		// siesty, prida sa aj counter
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
-				5, -1), navMenuTitles[5], "0", true));
+				5, -1), navMenuTitles[5]));
 
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
 				5, -1), navMenuTitles[6]));

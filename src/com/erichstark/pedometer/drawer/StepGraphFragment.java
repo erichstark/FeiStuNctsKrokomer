@@ -155,7 +155,7 @@ public class StepGraphFragment extends Fragment {
 
 		// Creating XYSeriesRenderer to customize viewsSeries
 		XYSeriesRenderer viewsRenderer = new XYSeriesRenderer();
-		viewsRenderer.setColor(Color.RED);
+		viewsRenderer.setColor(Color.rgb(34, 160, 51));
 		viewsRenderer.setPointStyle(PointStyle.SQUARE);
 		//viewsRenderer.setChartValuesSpacing(20);
 		//viewsRenderer.setDisplayChartValuesDistance(1);
