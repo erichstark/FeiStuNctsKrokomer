@@ -9,17 +9,16 @@ import com.erichstark.pedometer.customListView.steps.StepsAdapter;
 import com.erichstark.pedometer.drawer.LogoutFragment;
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
+import com.erichstark.pedometer.drawer.StepGraphFragment;
 import com.erichstark.pedometer.drawer.StepsHistoryFragment;
 import com.erichstark.pedometer.drawer.SummaryFragment;
 import com.erichstark.pedometer.drawer.UserProfileFragment;
 import com.erichstark.pedometer.oauth2.AsyncTaskActivityData;
 import com.erichstark.pedometer.oauth2.AsyncTaskLoginData;
-import com.erichstark.pedometer.oauth2.AsyncTaskUserData;
 import com.erichstark.pedometer.oauth2.WebViewActivity;
 import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
 import com.erichstark.pedometer.sqlite.model.ActivityReport;
 import com.erichstark.pedometer.sqlite.model.Login;
-import com.erichstark.pedometer.sqlite.model.User;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -231,7 +230,7 @@ public class MainActivity extends Activity {
 			fragment = new StepsHistoryFragment();
 			break;
 		case 3:
-			// fragment = new CommunityFragment();
+			fragment = new StepGraphFragment();
 			break;
 		case 4:
 			// fragment = new PagesFragment();

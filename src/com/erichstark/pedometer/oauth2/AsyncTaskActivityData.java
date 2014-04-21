@@ -1,6 +1,5 @@
 package com.erichstark.pedometer.oauth2;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +13,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 
@@ -29,51 +29,73 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 	protected Void doInBackground(String... arg0) {
 		// Creating service handler class instance
 		ServiceHandler sh = new ServiceHandler();
-		
+
 		// Making a request to url and getting response
 		String jsonStr = sh.makeServiceCall(arg0[0], ServiceHandler.GET);
-
-
 
 		if (jsonStr != null) {
 			try {
 				JSONObject jObjLogin = new JSONObject(jsonStr);
-				
-				JSONArray jData = jObjLogin.getJSONArray("ARDataList");
-				
-				db = new DatabaseHelper(context);
-				// looping through All Contacts
-                for (int i = 0; i < jData.length(); i++) {
-                    JSONObject c = jData.getJSONObject(i);
-                    
-                    ActivityReport report = new ActivityReport();
-                    report.setCalories(c.getInt("Calories"));
-                    report.setDistanceTraveled((float) c.getDouble("DistanceTraveled"));
-                    report.setMdate(c.getString("MDate"));
-                    report.setSteps(c.getString("Steps"));
 
-                    db.createActivityReport(report);
-                    
-                }
-                
+				JSONArray jData = jObjLogin.getJSONArray("ARDataList");
+
+				db = new DatabaseHelper(context);
+				
+				Log.d("ASyncTask: ", ""+ jData);
+
+				int prevSize = 0;
+				try {
+					prevSize = db.getAllActivityReports().size();
+				} catch (Exception e) {
+				}
+
+				if (prevSize > 0) {
+					//int startSize = jData.length() - prevSize;
+					for (int i = prevSize; i < jData.length(); i++) {
+						JSONObject c = jData.getJSONObject(i);
+
+						ActivityReport report = new ActivityReport();
+						report.setCalories(c.getInt("Calories"));
+						report.setDistanceTraveled((float) c
+								.getDouble("DistanceTraveled"));
+						report.setMdate(c.getString("MDate"));
+						report.setSteps(c.getString("Steps"));
+
+						db.createActivityReport(report);
+
+					}
+				} else if (prevSize == 0) {
+
+					// looping through All Contacts
+					for (int i = 0; i < jData.length(); i++) {
+						JSONObject c = jData.getJSONObject(i);
+
+						ActivityReport report = new ActivityReport();
+						report.setCalories(c.getInt("Calories"));
+						report.setDistanceTraveled((float) c
+								.getDouble("DistanceTraveled"));
+						report.setMdate(c.getString("MDate"));
+						report.setSteps(c.getString("Steps"));
+
+						db.createActivityReport(report);
+
+					}
+				}
 				db.close();
 
-				
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}
 		return null;
-		
+
 	}
 
-	
-	
 	@Override
 	protected void onPreExecute() {
 		// TODO Auto-generated method stub
 		super.onPreExecute();
-		
+
 		pd = new ProgressDialog(context);
 		pd.setMessage("Sťahujú sa najnovšie dáta...");
 		pd.show();
@@ -84,7 +106,5 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 		super.onPostExecute(result);
 		pd.dismiss();
 	}
-
-	
 
 }
