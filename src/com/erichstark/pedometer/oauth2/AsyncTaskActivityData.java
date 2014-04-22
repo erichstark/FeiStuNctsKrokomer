@@ -20,6 +20,9 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 	private Context context;
 	private DatabaseHelper db;
 	private ProgressDialog pd;
+	
+	private int prevSize;
+	private JSONArray jData;
 
 	public AsyncTaskActivityData(Context context) {
 		this.context = context;
@@ -37,20 +40,22 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 			try {
 				JSONObject jObjLogin = new JSONObject(jsonStr);
 
-				JSONArray jData = jObjLogin.getJSONArray("ARDataList");
+				jData = jObjLogin.getJSONArray("ARDataList");
 
 				db = new DatabaseHelper(context);
-				
-				Log.d("ASyncTask: ", ""+ jData);
 
-				int prevSize = 0;
+				Log.d("ASyncTask: ", "" + jData);
+
+				prevSize = 0;
 				try {
 					prevSize = db.getAllActivityReports().size();
 				} catch (Exception e) {
 				}
 
-				if (prevSize > 0) {
-					//int startSize = jData.length() - prevSize;
+				if (prevSize == jData.length()) {
+					Log.d("ActivityAsyncTask", "Ziadne nove itemy v cloude");
+				} else if (prevSize > 0) {
+					// int startSize = jData.length() - prevSize;
 					for (int i = prevSize; i < jData.length(); i++) {
 						JSONObject c = jData.getJSONObject(i);
 
@@ -76,7 +81,10 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 								.getDouble("DistanceTraveled"));
 						report.setMdate(c.getString("MDate"));
 						report.setSteps(c.getString("Steps"));
-
+						Log.d("distance json:         ",
+								"" + c.getDouble("DistanceTraveled"));
+						Log.d("distance report:         ",
+								"" + report.getDistanceTraveled());
 						db.createActivityReport(report);
 
 					}
@@ -104,6 +112,13 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
+		
+		if (prevSize == jData.length()) {
+			Toast.makeText(context, "Žiadne nové dáta.", Toast.LENGTH_SHORT).show();
+		} else if (prevSize < jData.length()) {
+			Toast.makeText(context, "Sťahujú sa novšie dáta.", Toast.LENGTH_SHORT).show();
+		}
+		
 		pd.dismiss();
 	}
 

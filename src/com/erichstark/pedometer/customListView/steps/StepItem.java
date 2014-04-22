@@ -7,7 +7,7 @@ public class StepItem {
 	private String steps;
 	
 	private int distanceIcon;
-	private String distance;
+	private double distance;
 	
 	private int caloriesIcon;
 	private String calories;
@@ -18,7 +18,7 @@ public class StepItem {
 	}
 	
 	public StepItem(String date, int stepsIcon, String steps, int distanceIcon,
-			String distance, int caloriesIcon, String calories) {
+			double distance, int caloriesIcon, String calories) {
 		super();
 		this.date = date;
 		this.stepsIcon = stepsIcon;
@@ -61,11 +61,11 @@ public class StepItem {
 		this.distanceIcon = distanceIcon;
 	}
 
-	public String getDistance() {
+	public double getDistance() {
 		return distance;
 	}
 
-	public void setDistance(String distance) {
+	public void setDistance(double distance) {
 		this.distance = distance;
 	}
 

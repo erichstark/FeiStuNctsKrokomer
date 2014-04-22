@@ -74,8 +74,7 @@ public class StepGraphFragment extends Fragment {
 			// + mydate.get(Calendar.MONTH) + "."
 			// + mydate.get(Calendar.YEAR);
 
-			steps.add(new StepItem(date_unix, 0, steps_s, 0, Float
-					.toString(distance), 0, Integer.toString(calories)));
+			steps.add(new StepItem(date_unix, 0, steps_s, 0, distance, 0, Integer.toString(calories)));
 		}
 
 		db.close();

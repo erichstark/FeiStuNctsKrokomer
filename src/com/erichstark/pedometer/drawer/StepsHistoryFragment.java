@@ -54,10 +54,8 @@ public class StepsHistoryFragment extends Fragment {
 		for (int i = 0; i < count; i++) {
 			String date_unix = activityReport.get(i).getMdate();
 			String steps_s = activityReport.get(i).getSteps();
-			float distance = activityReport.get(i).getDistanceTraveled();
+			double distance = activityReport.get(i).getDistanceTraveled();
 			int calories = activityReport.get(i).getCalories();
-
-			
 			
 			Calendar mydate = Calendar.getInstance();
 			mydate.setTimeInMillis(Long.parseLong(date_unix) * 1000);
@@ -65,9 +63,9 @@ public class StepsHistoryFragment extends Fragment {
 			String date = mydate.get(Calendar.DAY_OF_MONTH) + "."
 					+ mydate.get(Calendar.MONTH) + "."
 					+ mydate.get(Calendar.YEAR);
-
-			steps.add(new StepItem(date, 0, steps_s, 0, Float
-					.toString(distance), 0, Integer.toString(calories)));
+			// * 1000 / 1000 change to 3 decimal places
+			steps.add(new StepItem(date, 0, steps_s, 0, Math.ceil(distance * 1000.0) / 1000 , 0, Integer.toString(calories)));
+			Log.d("coro moro: no-f        ",distance + "");
 		}
 
 		db.close();

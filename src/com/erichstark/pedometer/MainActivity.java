@@ -410,12 +410,8 @@ public class MainActivity extends Activity {
 					+ mydate.get(Calendar.MONTH) + "."
 					+ mydate.get(Calendar.YEAR);
 
-			steps.add(new StepItem(date, 0, steps_s, 0, Float
-					.toString(distance), 0, Integer.toString(calories)));
+			steps.add(new StepItem(date, 0, steps_s, 0, distance, 0, Integer.toString(calories)));
 		}
-
-		steps.add(new StepItem("cucek", 0, "cucek", 0, Float.toString(1.4f), 0,
-				Integer.toString(10)));
 
 		stepsAdapter = new StepsAdapter(this, steps);
 		lvSteps.setAdapter(stepsAdapter);

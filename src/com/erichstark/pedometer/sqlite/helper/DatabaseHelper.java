@@ -466,7 +466,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		activity.setCalories(c.getInt(c.getColumnIndex(CALORIES)));
 		activity.setCurrentRecordCount(c.getInt(c.getColumnIndex(CURRENT_RECORD_COUNT)));
 		activity.setDataid(c.getString(c.getColumnIndex(DATA_ID)));
-		activity.setDistanceTraveled(c.getInt(c.getColumnIndex(DISTANCE_TRAVELED)));
+		activity.setDistanceTraveled(c.getFloat(c.getColumnIndex(DISTANCE_TRAVELED)));
 		activity.setDistanceUnit(c.getInt(c.getColumnIndex(DISTANCE_UNIT)));
 		activity.setLatitude(c.getDouble(c.getColumnIndex(LATITUDE)));
 		activity.setLongitude(c.getDouble(c.getColumnIndex(LONGITUDE)));
@@ -499,7 +499,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	    		activity.setCalories(c.getInt(c.getColumnIndex(CALORIES)));
 	    		activity.setCurrentRecordCount(c.getInt(c.getColumnIndex(CURRENT_RECORD_COUNT)));
 	    		activity.setDataid(c.getString(c.getColumnIndex(DATA_ID)));
-	    		activity.setDistanceTraveled(c.getInt(c.getColumnIndex(DISTANCE_TRAVELED)));
+	    		activity.setDistanceTraveled(c.getFloat(c.getColumnIndex(DISTANCE_TRAVELED)));
 	    		activity.setDistanceUnit(c.getInt(c.getColumnIndex(DISTANCE_UNIT)));
 	    		activity.setLatitude(c.getDouble(c.getColumnIndex(LATITUDE)));
 	    		activity.setLongitude(c.getDouble(c.getColumnIndex(LONGITUDE)));
