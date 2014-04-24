@@ -9,10 +9,13 @@ import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
 import com.erichstark.pedometer.sqlite.model.ActivityReport;
 import com.erichstark.pedometer.sqlite.model.Login;
 
+import android.R;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
@@ -20,7 +23,7 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 	private Context context;
 	private DatabaseHelper db;
 	private ProgressDialog pd;
-	
+
 	private int prevSize;
 	private JSONArray jData;
 
@@ -81,10 +84,6 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 								.getDouble("DistanceTraveled"));
 						report.setMdate(c.getString("MDate"));
 						report.setSteps(c.getString("Steps"));
-						Log.d("distance json:         ",
-								"" + c.getDouble("DistanceTraveled"));
-						Log.d("distance report:         ",
-								"" + report.getDistanceTraveled());
 						db.createActivityReport(report);
 
 					}
@@ -112,13 +111,16 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
-		
-		if (prevSize == jData.length()) {
-			Toast.makeText(context, "Žiadne nové dáta.", Toast.LENGTH_SHORT).show();
-		} else if (prevSize < jData.length()) {
-			Toast.makeText(context, "Sťahujú sa novšie dáta.", Toast.LENGTH_SHORT).show();
+
+		if (prevSize == 0) {
+		} else if (prevSize == jData.length()) {
+			Toast.makeText(context, "Žiadne nové dáta.", Toast.LENGTH_SHORT)
+					.show();
+		} else if ((prevSize < 0) && (prevSize < jData.length())) {
+			Toast.makeText(context, "Sťahujú sa novšie dáta.",
+					Toast.LENGTH_SHORT).show();
 		}
-		
+
 		pd.dismiss();
 	}
 

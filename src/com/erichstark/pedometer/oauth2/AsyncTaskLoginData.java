@@ -13,6 +13,7 @@ import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
 import com.erichstark.pedometer.sqlite.model.Login;
 import com.erichstark.pedometer.sqlite.model.User;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;

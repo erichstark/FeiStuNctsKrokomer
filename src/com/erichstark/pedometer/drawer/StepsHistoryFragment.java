@@ -65,7 +65,7 @@ public class StepsHistoryFragment extends Fragment {
 					+ mydate.get(Calendar.YEAR);
 			// * 1000 / 1000 change to 3 decimal places
 			steps.add(new StepItem(date, 0, steps_s, 0, Math.ceil(distance * 1000.0) / 1000 , 0, Integer.toString(calories)));
-			Log.d("coro moro: no-f        ",distance + "");
+			
 		}
 
 		db.close();
