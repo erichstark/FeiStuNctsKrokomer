@@ -84,13 +84,28 @@ public class AsyncTaskUserData extends AsyncTask<String, Void, User> {
 				+ "&redirect_uri=http://erichstark.com&access_token="
 				+ db.getLogin(1).getAccess_token()
 				+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
+		
+		// test activity report
+				String sleepUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+						+ db.getLogin(1).getUser_id()
+						+ "/sleep.json/?client_id="
+						+ MainActivity.CLIENT_ID
+						+ "&client_secret="
+						+ MainActivity.CLIENT_SECRET
+						+ "&redirect_uri=http://erichstark.com&access_token="
+						+ db.getLogin(1).getAccess_token()
+						+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=a14d9e8e73aa4dcb98f2db0acaaff690";
+		
+		
 		db.close();
 
 		AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(context);
 		AsyncTask<String, Void, Void> asyncGetActivityData = getActivityData
 				.execute(activityUrl);
 		
-		db.close();
+		AsyncTaskSleepData getSleepData = new AsyncTaskSleepData(context);
+		AsyncTask<String, Void, Void> asyncGetSleepData = getSleepData
+				.execute(sleepUrl);
 
 
 	}
