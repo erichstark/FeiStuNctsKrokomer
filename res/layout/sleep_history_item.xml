@@ -1,8 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative_layout_sleep_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
+    android:padding="5dp">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_sleep_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date" />
+
+    <TextView
+        android:id="@+id/tv_sleep_efficiency_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_sleep_date"
+        android:layout_below="@+id/tv_sleep_date"
+        android:text="@string/sleep_efficiency_label" />
+
+    <TextView
+        android:id="@+id/tv_sleep_hours_slept_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_sleep_efficiency_label"
+        android:layout_below="@+id/tv_sleep_efficiency_label"
+        android:text="@string/hours_slept_label" />
+
+    <TextView
+        android:id="@+id/tv_sleep_fell_sleep_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_sleep_hours_slept_label"
+        android:layout_below="@+id/tv_sleep_hours_slept_label"
+        android:text="@string/sleep_fell_sleep_label" />
+
+    <TextView
+        android:id="@+id/tv_sleep_awaken_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_sleep_fell_sleep_label"
+        android:layout_below="@+id/tv_sleep_fell_sleep_label"
+        android:text="@string/tv_sleep_awaken" />
+
+    <TextView
+        android:id="@+id/tv_sleep_efficiency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_sleep_hours_slept"
+        android:layout_marginLeft="100dp"
+        android:layout_toRightOf="@+id/tv_sleep_efficiency_label"
+        android:text="93 %" />
+
+    <TextView
+        android:id="@+id/tv_sleep_hours_slept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_sleep_efficiency"
+        android:layout_below="@+id/tv_sleep_efficiency_label"
+        android:text="8 hod" />
+
+    <TextView
+        android:id="@+id/tv_sleep_fell_sleep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_sleep_hours_slept"
+        android:layout_below="@+id/tv_sleep_hours_slept"
+        android:text="20 min" />
+
+    <TextView
+        android:id="@+id/tv_sleep_awaken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_sleep_awaken_label"
+        android:layout_alignBottom="@+id/tv_sleep_awaken_label"
+        android:layout_alignLeft="@+id/tv_sleep_fell_sleep"
+        android:text="10" />
+
+</RelativeLayout>

@@ -39,6 +39,8 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 		// Making a request to url and getting response
 		String jsonStr = sh.makeServiceCall(arg0[0], ServiceHandler.GET);
 
+		//Log.d("Response: acccccc", "> " + jsonStr);
+		
 		if (jsonStr != null) {
 			try {
 				JSONObject jObjLogin = new JSONObject(jsonStr);
@@ -103,25 +105,44 @@ public class AsyncTaskActivityData extends AsyncTask<String, Void, Void> {
 		// TODO Auto-generated method stub
 		super.onPreExecute();
 
-		pd = new ProgressDialog(context);
-		pd.setMessage("Sťahujú sa najnovšie dáta...");
-		pd.show();
+//		pd = new ProgressDialog(context);
+//		pd.setMessage("Sťahujú sa najnovšie dáta...");
+//		pd.show();
 	}
 
 	@Override
 	protected void onPostExecute(Void result) {
 		super.onPostExecute(result);
 
-		if (prevSize == 0) {
-		} else if (prevSize == jData.length()) {
-			Toast.makeText(context, "Žiadne nové dáta.", Toast.LENGTH_SHORT)
-					.show();
-		} else if ((prevSize < 0) && (prevSize < jData.length())) {
-			Toast.makeText(context, "Sťahujú sa novšie dáta.",
-					Toast.LENGTH_SHORT).show();
-		}
+//		if (prevSize == 0) {
+//		} else if (prevSize == jData.length()) {
+//			Toast.makeText(context, "Žiadne nové dáta.", Toast.LENGTH_SHORT)
+//					.show();
+//		} else if ((prevSize < 0) && (prevSize < jData.length())) {
+//			Toast.makeText(context, "Sťahujú sa novšie dáta.",
+//					Toast.LENGTH_SHORT).show();
+//		}
 
-		pd.dismiss();
+		//pd.dismiss();
+		db = new DatabaseHelper(context);
+		
+		// test activity report
+		String sleepUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+				+ db.getLogin(1).getUser_id()
+				+ "/sleep.json/?client_id="
+				+ MainActivity.CLIENT_ID
+				+ "&client_secret="
+				+ MainActivity.CLIENT_SECRET
+				+ "&redirect_uri=http://erichstark.com&access_token="
+				+ db.getLogin(1).getAccess_token()
+				+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=a14d9e8e73aa4dcb98f2db0acaaff690";
+
+		db.close();
+		
+		AsyncTaskSleepData getSleepData = new AsyncTaskSleepData(context);
+		AsyncTask<String, Void, Void> asyncGetSleepData = getSleepData
+				.execute(sleepUrl);
+		
 	}
 
 }

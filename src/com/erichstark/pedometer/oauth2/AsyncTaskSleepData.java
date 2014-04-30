@@ -44,7 +44,7 @@ public class AsyncTaskSleepData extends AsyncTask<String, Void, Void> {
 
 				db = new DatabaseHelper(context);
 
-				Log.d("ASyncTask: ", "" + jData);
+				Log.d("ASyncTaskSleep: ", "" + jData);
 
 				prevSize = 0;
 				try {
@@ -104,9 +104,9 @@ public class AsyncTaskSleepData extends AsyncTask<String, Void, Void> {
 		// TODO Auto-generated method stub
 		super.onPreExecute();
 
-//		pd = new ProgressDialog(context);
-//		pd.setMessage("Sťahujú sa najnovšie dáta...");
-//		pd.show();
+		pd = new ProgressDialog(context);
+		pd.setMessage("Sťahujú sa najnovšie dáta...");
+		pd.show();
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class AsyncTaskSleepData extends AsyncTask<String, Void, Void> {
 					Toast.LENGTH_SHORT).show();
 		}
 
-		//pd.dismiss();
+		pd.dismiss();
 	}
 
 }

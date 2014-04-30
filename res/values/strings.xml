@@ -48,5 +48,9 @@
     <string name="summary_text_changed">Prehľad bol aktualizovaný</string>
     <string name="toast_profil_updated">Profil bol aktualizovaný</string>
     <string name="list_of_items_updated">Zoznam bol aktualizovaný</string>
+    <string name="sleep_efficiency_label">Kvalita spánku:</string>
+    <string name="hours_slept_label">Spánok:</string>
+    <string name="sleep_fell_sleep_label">Zaspal za:</string>
+    <string name="tv_sleep_awaken">Počet zobudení:</string>
  
 </resources>

@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/userImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:contentDescription="@string/fotka_uzivatela"
         android:src="@drawable/user_image" />
 

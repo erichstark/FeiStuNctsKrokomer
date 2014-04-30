@@ -52,6 +52,7 @@ public class AsyncTaskUserData extends AsyncTask<String, Void, User> {
 				user.setWeight((float) jObjUser.getDouble("weight"));
 				user.setWeightUnit(jObjUser.getInt("WeightUnit"));
 				user.setLogo(jObjUser.getString("logo"));
+				Log.d("AAAAAAAA",""+ jObjUser.getString("logo"));
 				user.setNickname(jObjUser.getString("nickname"));
 				user.setUserid(jObjUser.getString("userid"));
 				
@@ -85,16 +86,6 @@ public class AsyncTaskUserData extends AsyncTask<String, Void, User> {
 				+ db.getLogin(1).getAccess_token()
 				+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
 		
-		// test activity report
-				String sleepUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
-						+ db.getLogin(1).getUser_id()
-						+ "/sleep.json/?client_id="
-						+ MainActivity.CLIENT_ID
-						+ "&client_secret="
-						+ MainActivity.CLIENT_SECRET
-						+ "&redirect_uri=http://erichstark.com&access_token="
-						+ db.getLogin(1).getAccess_token()
-						+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=a14d9e8e73aa4dcb98f2db0acaaff690";
 		
 		
 		db.close();
@@ -102,11 +93,10 @@ public class AsyncTaskUserData extends AsyncTask<String, Void, User> {
 		AsyncTaskActivityData getActivityData = new AsyncTaskActivityData(context);
 		AsyncTask<String, Void, Void> asyncGetActivityData = getActivityData
 				.execute(activityUrl);
-		
-		AsyncTaskSleepData getSleepData = new AsyncTaskSleepData(context);
-		AsyncTask<String, Void, Void> asyncGetSleepData = getSleepData
-				.execute(sleepUrl);
-
+	
+		AsyncTaskDownloadPhoto getPhoto = new AsyncTaskDownloadPhoto(context);
+		AsyncTask<String, Void, Void> asyncGetPhoto = getPhoto
+				.execute("");
 
 	}
 
@@ -116,5 +106,6 @@ public class AsyncTaskUserData extends AsyncTask<String, Void, User> {
         Date date = new Date();
         return dateFormat.format(date);
 	}
+	
 
 }

@@ -9,6 +9,7 @@ import com.erichstark.pedometer.customListView.steps.StepsAdapter;
 import com.erichstark.pedometer.drawer.LogoutFragment;
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
+import com.erichstark.pedometer.drawer.SleepHistoryFragment;
 import com.erichstark.pedometer.drawer.StepGraphFragment;
 import com.erichstark.pedometer.drawer.StepsHistoryFragment;
 import com.erichstark.pedometer.drawer.SummaryFragment;
@@ -110,6 +111,13 @@ public class MainActivity extends Activity {
 			numberOfStepItems = Integer.toString(db.getAllActivityReports().size());
 		} catch (Exception e) {
 		}
+		
+		String numberOfSleepItems = "0";
+		try {
+			numberOfSleepItems = Integer.toString(db.getAllSleepReports().size());
+		} catch (Exception e) {
+		}
+		
 		db.close();
 		
 		// set title
@@ -142,7 +150,7 @@ public class MainActivity extends Activity {
 				3, -1), navMenuTitles[3]));
 		// piaty
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
-				4, -1), navMenuTitles[4], "0", true));
+				4, -1), navMenuTitles[4], numberOfSleepItems, true));
 		// siesty, prida sa aj counter
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
 				5, -1), navMenuTitles[5]));
@@ -221,7 +229,7 @@ public class MainActivity extends Activity {
 			fragment = new StepGraphFragment();
 			break;
 		case 4:
-			// fragment = new PagesFragment();
+			fragment = new SleepHistoryFragment();
 			break;
 		case 5:
 			// fragment = new CommunityFragment();
@@ -377,17 +385,17 @@ public class MainActivity extends Activity {
 				+ db.getLogin(1).getAccess_token()
 				+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=e9495e71db784657a16edfadf6f06754";
 		
-		String sleepUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
-				+ db.getLogin(1).getUser_id()
-				+ "/sleep.json/?client_id="
-				+ MainActivity.CLIENT_ID
-				+ "&client_secret="
-				+ MainActivity.CLIENT_SECRET
-				+ "&redirect_uri=http://erichstark.com&access_token="
-				+ db.getLogin(1).getAccess_token()
-				+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=a14d9e8e73aa4dcb98f2db0acaaff690";
-
-		
+//		String sleepUrl = "https://api.ihealthlabs.com:8443/openapiv2/user/"
+//				+ db.getLogin(1).getUser_id()
+//				+ "/sleep.json/?client_id="
+//				+ MainActivity.CLIENT_ID
+//				+ "&client_secret="
+//				+ MainActivity.CLIENT_SECRET
+//				+ "&redirect_uri=http://erichstark.com&access_token="
+//				+ db.getLogin(1).getAccess_token()
+//				+ "&page_index=1&sc=17979dfde8cb4c30813ad612d0b974e9&sv=a14d9e8e73aa4dcb98f2db0acaaff690";
+//
+//		
 		
 		
 		db.close();
@@ -396,9 +404,9 @@ public class MainActivity extends Activity {
 		AsyncTask<String, Void, Void> asyncGetActivityData = getActivityData
 				.execute(activityUrl);
 		
-		AsyncTaskSleepData getSleepData = new AsyncTaskSleepData(this);
-		AsyncTask<String, Void, Void> asyncGetSleepData = getSleepData
-				.execute(sleepUrl);
+//		AsyncTaskSleepData getSleepData = new AsyncTaskSleepData(this);
+//		AsyncTask<String, Void, Void> asyncGetSleepData = getSleepData
+//				.execute(sleepUrl);
 
 		// synchronizeActivityReport();
 
