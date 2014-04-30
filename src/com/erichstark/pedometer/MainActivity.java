@@ -9,6 +9,7 @@ import com.erichstark.pedometer.customListView.steps.StepsAdapter;
 import com.erichstark.pedometer.drawer.LogoutFragment;
 import com.erichstark.pedometer.drawer.NavigationDrawerItem;
 import com.erichstark.pedometer.drawer.NavigationDrawerListAdapter;
+import com.erichstark.pedometer.drawer.SleepGraphFragment;
 import com.erichstark.pedometer.drawer.SleepHistoryFragment;
 import com.erichstark.pedometer.drawer.StepGraphFragment;
 import com.erichstark.pedometer.drawer.StepsHistoryFragment;
@@ -106,13 +107,13 @@ public class MainActivity extends Activity {
 
 		db = new DatabaseHelper(getApplicationContext());
 
-		String numberOfStepItems = "0";
+		String numberOfStepItems = "";
 		try {
 			numberOfStepItems = Integer.toString(db.getAllActivityReports().size());
 		} catch (Exception e) {
 		}
 		
-		String numberOfSleepItems = "0";
+		String numberOfSleepItems = "";
 		try {
 			numberOfSleepItems = Integer.toString(db.getAllSleepReports().size());
 		} catch (Exception e) {
@@ -232,7 +233,7 @@ public class MainActivity extends Activity {
 			fragment = new SleepHistoryFragment();
 			break;
 		case 5:
-			// fragment = new CommunityFragment();
+			fragment = new SleepGraphFragment();
 			break;
 		case 6:
 			fragment = new LogoutFragment();
