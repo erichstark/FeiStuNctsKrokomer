@@ -17,7 +17,6 @@ import com.erichstark.pedometer.drawer.SummaryFragment;
 import com.erichstark.pedometer.drawer.UserProfileFragment;
 import com.erichstark.pedometer.oauth2.AsyncTaskActivityData;
 import com.erichstark.pedometer.oauth2.AsyncTaskLoginData;
-import com.erichstark.pedometer.oauth2.AsyncTaskSleepData;
 import com.erichstark.pedometer.oauth2.WebViewActivity;
 import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
 import com.erichstark.pedometer.sqlite.model.ActivityReport;
@@ -34,15 +33,12 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -283,7 +279,9 @@ public class MainActivity extends Activity {
 		}
 		// Handle action bar actions click
 		switch (item.getItemId()) {
-		case R.id.action_settings:
+		case R.id.about:
+			Intent i = new Intent(MainActivity.this, InfoActivity.class);
+			startActivity(i);
 			return true;
 		case R.id.synchronize:
 			synchronizeAll();
@@ -300,7 +298,7 @@ public class MainActivity extends Activity {
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// if nav drawer is opened, hide the action items
 		boolean drawerOpen = drawerLayout.isDrawerOpen(drawerListView);
-		menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+		menu.findItem(R.id.about).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -445,4 +443,6 @@ public class MainActivity extends Activity {
 		lvSteps.setAdapter(stepsAdapter);
 	}
 
+	
+	
 }

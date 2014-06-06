@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.achartengine.ChartFactory;
@@ -22,9 +21,7 @@ import org.joda.time.Period;
 
 import com.erichstark.pedometer.R;
 import com.erichstark.pedometer.customListView.sleep.SleepItem;
-import com.erichstark.pedometer.customListView.steps.StepItem;
 import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
-import com.erichstark.pedometer.sqlite.model.ActivityReport;
 import com.erichstark.pedometer.sqlite.model.SleepReport;
 
 import android.app.Fragment;

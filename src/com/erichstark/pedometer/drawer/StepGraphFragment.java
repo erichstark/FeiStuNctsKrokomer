@@ -1,11 +1,8 @@
 package com.erichstark.pedometer.drawer;
 
 import java.text.Format;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -25,11 +22,8 @@ import com.erichstark.pedometer.sqlite.helper.DatabaseHelper;
 import com.erichstark.pedometer.sqlite.model.ActivityReport;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Paint.Align;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

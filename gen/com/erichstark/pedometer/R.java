@@ -40,46 +40,49 @@ public final class R {
     }
     public static final class drawable {
         public static final int counter_bg=0x7f020000;
-        public static final int ic_action_refresh=0x7f020001;
-        public static final int ic_communities=0x7f020002;
-        public static final int ic_drawer=0x7f020003;
-        public static final int ic_home=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int ic_navigation_drawer=0x7f020006;
-        public static final int ic_pages=0x7f020007;
-        public static final int ic_people=0x7f020008;
-        public static final int ic_photos=0x7f020009;
-        public static final int ic_pulltorefresh_arrow=0x7f02000a;
-        public static final int ic_whats_hot=0x7f02000b;
-        public static final int list_item_bg_normal=0x7f02000c;
-        public static final int list_item_bg_pressed=0x7f02000d;
-        public static final int list_selector=0x7f02000e;
-        public static final int pull_to_refresh_header_background=0x7f02000f;
-        public static final int step_burn=0x7f020010;
-        public static final int step_burn_max=0x7f020011;
-        public static final int step_distance=0x7f020012;
-        public static final int step_distance_max=0x7f020013;
-        public static final int step_feet=0x7f020014;
-        public static final int step_feet_max=0x7f020015;
-        public static final int steps_distance=0x7f020016;
-        public static final int user_image=0x7f020017;
+        public static final int fei_logo=0x7f020001;
+        public static final int ic_action_about=0x7f020002;
+        public static final int ic_action_refresh=0x7f020003;
+        public static final int ic_communities=0x7f020004;
+        public static final int ic_drawer=0x7f020005;
+        public static final int ic_home=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int ic_navigation_drawer=0x7f020008;
+        public static final int ic_pages=0x7f020009;
+        public static final int ic_people=0x7f02000a;
+        public static final int ic_photos=0x7f02000b;
+        public static final int ic_pulltorefresh_arrow=0x7f02000c;
+        public static final int ic_whats_hot=0x7f02000d;
+        public static final int list_item_bg_normal=0x7f02000e;
+        public static final int list_item_bg_pressed=0x7f02000f;
+        public static final int list_selector=0x7f020010;
+        public static final int pull_to_refresh_header_background=0x7f020011;
+        public static final int step_burn=0x7f020012;
+        public static final int step_burn_max=0x7f020013;
+        public static final int step_distance=0x7f020014;
+        public static final int step_distance_max=0x7f020015;
+        public static final int step_feet=0x7f020016;
+        public static final int step_feet_max=0x7f020017;
+        public static final int steps_distance=0x7f020018;
+        public static final int user_image=0x7f020019;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0039;
+        public static final int about=0x7f0a003b;
         public static final int counter=0x7f0a0005;
         public static final int drawer_layout=0x7f0a0000;
         public static final int frame_container=0x7f0a0001;
         public static final int icon=0x7f0a0003;
-        public static final int img_step_calories=0x7f0a0033;
-        public static final int img_steps_distance=0x7f0a0032;
-        public static final int img_steps_steps=0x7f0a002f;
+        public static final int imageView1=0x7f0a0023;
+        public static final int img_step_calories=0x7f0a0035;
+        public static final int img_steps_distance=0x7f0a0034;
+        public static final int img_steps_steps=0x7f0a0031;
         public static final int layout_fragment_graph_sleep=0x7f0a0006;
         public static final int layout_fragment_graph_steps=0x7f0a0007;
         public static final int layout_fragment_steps_history=0x7f0a000a;
         public static final int layout_fragment_user=0x7f0a0008;
         public static final int list_slidermenu=0x7f0a0002;
-        public static final int relative_layout_sleep_item=0x7f0a0023;
-        public static final int relative_layout_steps_item=0x7f0a002d;
+        public static final int relative_layout_sleep_item=0x7f0a0025;
+        public static final int relative_layout_steps_item=0x7f0a002f;
         public static final int sleep_listView=0x7f0a0009;
         public static final int step_listView=0x7f0a000b;
         public static final int summary_first=0x7f0a000d;
@@ -89,12 +92,13 @@ public final class R {
         public static final int summary_linear=0x7f0a000c;
         public static final int summary_second=0x7f0a0011;
         public static final int summary_third=0x7f0a0015;
-        public static final int synchronize=0x7f0a003a;
+        public static final int synchronize=0x7f0a003c;
+        public static final int textViewInfoApp=0x7f0a0024;
         public static final int title=0x7f0a0004;
-        public static final int tv_calories_label=0x7f0a0037;
-        public static final int tv_calories_value=0x7f0a0035;
-        public static final int tv_distance_label=0x7f0a0036;
-        public static final int tv_distance_value=0x7f0a0034;
+        public static final int tv_calories_label=0x7f0a0039;
+        public static final int tv_calories_value=0x7f0a0037;
+        public static final int tv_distance_label=0x7f0a0038;
+        public static final int tv_distance_value=0x7f0a0036;
         public static final int tv_gender=0x7f0a001e;
         public static final int tv_height=0x7f0a0020;
         public static final int tv_label_gender=0x7f0a001d;
@@ -102,18 +106,18 @@ public final class R {
         public static final int tv_label_nickname=0x7f0a001a;
         public static final int tv_label_weight=0x7f0a0021;
         public static final int tv_nickname=0x7f0a001b;
-        public static final int tv_sleep_awaken=0x7f0a002c;
-        public static final int tv_sleep_awaken_label=0x7f0a0028;
-        public static final int tv_sleep_date=0x7f0a0024;
-        public static final int tv_sleep_efficiency=0x7f0a0029;
-        public static final int tv_sleep_efficiency_label=0x7f0a0025;
-        public static final int tv_sleep_fell_sleep=0x7f0a002b;
-        public static final int tv_sleep_fell_sleep_label=0x7f0a0027;
-        public static final int tv_sleep_hours_slept=0x7f0a002a;
-        public static final int tv_sleep_hours_slept_label=0x7f0a0026;
-        public static final int tv_steps_date=0x7f0a002e;
-        public static final int tv_steps_label=0x7f0a0031;
-        public static final int tv_steps_value=0x7f0a0030;
+        public static final int tv_sleep_awaken=0x7f0a002e;
+        public static final int tv_sleep_awaken_label=0x7f0a002a;
+        public static final int tv_sleep_date=0x7f0a0026;
+        public static final int tv_sleep_efficiency=0x7f0a002b;
+        public static final int tv_sleep_efficiency_label=0x7f0a0027;
+        public static final int tv_sleep_fell_sleep=0x7f0a002d;
+        public static final int tv_sleep_fell_sleep_label=0x7f0a0029;
+        public static final int tv_sleep_hours_slept=0x7f0a002c;
+        public static final int tv_sleep_hours_slept_label=0x7f0a0028;
+        public static final int tv_steps_date=0x7f0a0030;
+        public static final int tv_steps_label=0x7f0a0033;
+        public static final int tv_steps_value=0x7f0a0032;
         public static final int tv_summary_calories=0x7f0a0017;
         public static final int tv_summary_calories_label=0x7f0a0018;
         public static final int tv_summary_distance=0x7f0a0013;
@@ -123,7 +127,7 @@ public final class R {
         public static final int tv_weight=0x7f0a0022;
         public static final int userData=0x7f0a001c;
         public static final int userImage=0x7f0a0019;
-        public static final int webView1=0x7f0a0038;
+        public static final int webView1=0x7f0a003a;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -136,15 +140,16 @@ public final class R {
         public static final int fragment_steps_history=0x7f030007;
         public static final int fragment_summary=0x7f030008;
         public static final int fragment_user=0x7f030009;
-        public static final int sleep_history_item=0x7f03000a;
-        public static final int steps_history_item=0x7f03000b;
-        public static final int web_view=0x7f03000c;
+        public static final int info_app=0x7f03000a;
+        public static final int sleep_history_item=0x7f03000b;
+        public static final int steps_history_item=0x7f03000c;
+        public static final int web_view=0x7f03000d;
     }
     public static final class menu {
         public static final int main=0x7f090000;
     }
     public static final class string {
-        public static final int action_settings=0x7f060001;
+        public static final int about=0x7f060001;
         public static final int app_name=0x7f060000;
         /**  Content Description 
          */
