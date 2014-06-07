@@ -110,9 +110,6 @@ public class StepGraphFragment extends Fragment {
 		// Toast.LENGTH_LONG).show();
 		// }
 
-		int[] visits = { 2000, 2500, 2700, 2100, 2800 };
-		int[] views = { 2200, 2700, 2900, 2800, 3200 };
-
 		// Creating TimeSeries for Visits
 		TimeSeries visitsSeries = new TimeSeries("Visits");
 

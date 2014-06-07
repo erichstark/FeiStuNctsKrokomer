@@ -12,7 +12,7 @@ public class InfoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.info_app);
 		
-		text = "Autorom tejto aplikácie je Erich Stark a bola vytvorená ako súčasť bakalárskej práce"
+		text = "Autorom tejto aplikácie je Erich Stark a bola vytvorená ako súčasť bakalárskej práce "
 				+ "na škole Fakulty elektrotechniky a informatiky STU.\n"
 				+ "Vedúci tejto práce bol Ing. Fedor Lehocki, PhD.\n\n"
 				+ "Aplikácia slúží na získanie dát z krokomera od firmy iHealth Labs Inc. resp. "

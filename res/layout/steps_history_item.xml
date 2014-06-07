@@ -8,6 +8,7 @@
         android:id="@+id/tv_steps_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/text_color"
         android:layout_marginBottom="5dp" />
 
     <!--
@@ -29,12 +30,13 @@
         android:layout_below="@+id/tv_steps_date"
         android:layout_marginRight="5dp"
         android:contentDescription="@string/step_icon"
-        android:src="@drawable/step_feet" />
+        android:src="@drawable/ic_steps" />
 
     <TextView
         android:id="@+id/tv_steps_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/text_color"
         android:layout_alignBottom="@+id/img_steps_steps"
         android:layout_toRightOf="@+id/img_steps_steps" />
 
@@ -42,6 +44,7 @@
         android:id="@+id/tv_steps_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/text_color"
         android:layout_above="@+id/tv_steps_value"
         android:layout_alignLeft="@+id/tv_steps_value"
         android:text="@string/label_steps" />
@@ -50,24 +53,27 @@
         android:id="@+id/img_steps_distance"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignBottom="@+id/tv_steps_value"
-        android:layout_marginLeft="40dp"
-        android:layout_toRightOf="@+id/tv_steps_value"
-        android:src="@drawable/step_distance" />
+        android:layout_alignBottom="@+id/img_steps_steps"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@+id/img_steps_steps"
+        android:src="@drawable/ic_kilometers" />
 
     <ImageView
         android:id="@+id/img_step_calories"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignBottom="@+id/tv_distance_value"
-        android:layout_marginLeft="60dp"
-        android:layout_toRightOf="@+id/tv_distance_value"
-        android:src="@drawable/step_burn" />
+        android:layout_alignBottom="@+id/img_steps_distance"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="5dp"
+        android:layout_toRightOf="@+id/img_steps_distance"
+        android:src="@drawable/ic_calorie" />
 
     <TextView
         android:id="@+id/tv_calories_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/text_color"
         android:layout_alignBottom="@+id/img_step_calories"
         android:layout_toRightOf="@+id/img_step_calories" />
 
@@ -75,6 +81,7 @@
         android:id="@+id/tv_distance_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/text_color"
         android:layout_alignBottom="@+id/img_steps_distance"
         android:layout_alignLeft="@+id/tv_distance_label" />
 
@@ -85,12 +92,14 @@
         android:layout_alignBaseline="@+id/tv_steps_label"
         android:layout_alignBottom="@+id/tv_steps_label"
         android:layout_toRightOf="@+id/img_steps_distance"
+        android:textColor="@color/text_color"
         android:text="@string/label_distance" />
 
     <TextView
         android:id="@+id/tv_calories_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/text_color"
         android:layout_alignBottom="@+id/tv_distance_label"
         android:layout_alignLeft="@+id/tv_calories_value"
         android:text="@string/label_calories" />

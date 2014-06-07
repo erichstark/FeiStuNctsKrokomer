@@ -153,7 +153,7 @@ public class MainActivity extends Activity {
 				5, -1), navMenuTitles[5]));
 
 		navDrawerItems.add(new NavigationDrawerItem(navMenuIcons.getResourceId(
-				5, -1), navMenuTitles[6]));
+				6, -1), navMenuTitles[6]));
 
 		// free icons from memory
 		navMenuIcons.recycle();

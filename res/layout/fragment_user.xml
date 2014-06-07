@@ -2,88 +2,112 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_fragment_user"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp" >
 
     <ImageView
         android:id="@+id/userImage"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:contentDescription="@string/fotka_uzivatela"
         android:src="@drawable/user_image" />
-
-    <TextView
-        android:id="@+id/tv_label_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/userImage"
-        android:text="@string/login_name"
-        android:textSize="25sp" />
-
-    <TextView
-        android:id="@+id/tv_nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_label_nickname"
-        android:layout_toRightOf="@id/userImage"
-        android:textSize="20sp" />
 
     <RelativeLayout
         android:id="@+id/userData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/userImage"
-        android:layout_marginTop="20dp" >
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/userImage"
+        android:layout_margin="10dp" >
 
-        <TextView
-            android:id="@+id/tv_label_gender"
+        <LinearLayout
+            android:id="@+id/lin_lay_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gender"
-            android:textSize="18sp" />
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp" >
 
-        <TextView
-            android:id="@+id/tv_gender"
+            <TextView
+                android:id="@+id/tv_label_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_name"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_lay_gen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="18sp" />
+            android:layout_below="@id/lin_lay_name" >
 
-        <TextView
-            android:id="@+id/tv_label_height"
+            <TextView
+                android:id="@+id/tv_label_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="27dp"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_lay_height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_label_gender"
-            android:text="@string/height"
-            android:textSize="18sp" />
+            android:layout_below="@id/lin_lay_gen" >
 
-        <TextView
-            android:id="@+id/tv_height"
+            <TextView
+                android:id="@+id/tv_label_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/height"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="46dp"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_lay_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tv_label_height"
-            android:layout_alignBottom="@+id/tv_label_height"
-            android:layout_alignLeft="@+id/tv_gender"
-            android:textSize="18sp" />
+            android:layout_below="@id/lin_lay_height" >
 
-        <TextView
-            android:id="@+id/tv_label_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_height"
-            android:text="@string/weight"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tv_label_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight"
+                android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tv_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tv_label_weight"
-            android:layout_alignBottom="@+id/tv_label_weight"
-            android:layout_alignLeft="@+id/tv_height"
-            android:textSize="18sp" />
-
+            <TextView
+                android:id="@+id/tv_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="54dp"
+                android:textSize="18sp" />
+        </LinearLayout>
     </RelativeLayout>
-
 
 </RelativeLayout>

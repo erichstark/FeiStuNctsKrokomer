@@ -16,7 +16,7 @@
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:src="@drawable/step_feet_max" />
+            android:src="@drawable/ic_steps" />
 
         <TextView
             android:id="@+id/tv_summary_steps"
@@ -54,7 +54,7 @@
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:src="@drawable/step_distance_max" />
+            android:src="@drawable/ic_kilometers" />
 
         <TextView
             android:id="@+id/tv_summary_distance"
@@ -92,7 +92,7 @@
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:src="@drawable/step_burn_max" />
+            android:src="@drawable/ic_calorie" />
 
         <TextView
             android:id="@+id/tv_summary_calories"

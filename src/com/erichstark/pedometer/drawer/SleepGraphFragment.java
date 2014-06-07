@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.achartengine.ChartFactory;
@@ -35,16 +36,19 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class SleepGraphFragment extends Fragment {
-	
+
 	private GraphicalView mChart;
 	private DatabaseHelper db;
 	private ArrayList<SleepItem> sleeps;
 	List<SleepReport> sleepReport;
-	
+
 	Period per;
 
-	/* (non-Javadoc)
-	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater,
+	 * android.view.ViewGroup, android.os.Bundle)
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +58,7 @@ public class SleepGraphFragment extends Fragment {
 		openChart(rootView);
 		return rootView;
 	}
-	
+
 	private void openChart(View rootView) {
 
 		db = new DatabaseHelper(getActivity());
@@ -65,31 +69,36 @@ public class SleepGraphFragment extends Fragment {
 		int itemsCount = sleepReport.size();
 
 		for (int i = 0; i < itemsCount; i++) {
-			//tmp
+			// tmp
 			String start_date_unix = sleepReport.get(i).getStartTime();
 			String end_date_unix = sleepReport.get(i).getEndTime();
 			
-			
-			String sleep_eff = Integer.toString(sleepReport.get(i).getSleepEfficiency());
+			Log.d("long time :::: ", end_date_unix);
+
+			String sleep_eff = Integer.toString(sleepReport.get(i)
+					.getSleepEfficiency());
 			String hours_slept = "0";
-			String fell_sleep = Integer.toString(sleepReport.get(i).getFellSleep());
+			String fell_sleep = Integer.toString(sleepReport.get(i)
+					.getFellSleep());
 			String awaken = Integer.toString(sleepReport.get(i).getAwaken());
-			
+
 			Calendar mydate = Calendar.getInstance();
 			mydate.setTimeInMillis(Long.parseLong(end_date_unix) * 1000);
 
 			String date = mydate.get(Calendar.DAY_OF_MONTH) + "."
 					+ mydate.get(Calendar.MONTH) + "."
 					+ mydate.get(Calendar.YEAR);
-			
-			//Period p;
+
+			// Period p;
 			per = diffTime(start_date_unix, end_date_unix);
-			
+
 			String p_s = per.getHours() + ":" + per.getMinutes();
-			
+
 			// * 1000 / 1000 change to 3 decimal places
-			sleeps.add(new SleepItem(date, sleep_eff, Integer.toString(per.getHours()), fell_sleep, awaken));
-			//sleeps.add(new StepItem(date, 0, steps_s, 0, Math.ceil(distance * 1000.0) / 1000 , 0, Integer.toString(calories)));
+			sleeps.add(new SleepItem(end_date_unix, sleep_eff, Integer
+					.toString(per.getHours()), fell_sleep, awaken));
+			// sleeps.add(new StepItem(date, 0, steps_s, 0, Math.ceil(distance *
+			// 1000.0) / 1000 , 0, Integer.toString(calories)));
 		}
 
 		db.close();
@@ -100,32 +109,49 @@ public class SleepGraphFragment extends Fragment {
 		// formatter = new SimpleDateFormat("dd-MMM-yyyy");
 		//
 		//
+		Log.d("datum raw", new Date() + "");
+		
 		String str_date = "";
 		Date[] dt = new Date[sleeps.size()];
 		for (int i = 0; i < sleeps.size(); i++) {
-			str_date = sleeps.get(i).getDate();
-			Log.d("Datum:   ",""+str_date);
-			//GregorianCalendar gc = new GregorianCalendar();
-			//gc.setTimeInMillis(Long.parseLong(str_date) * 1000);
-			try {
-				dt[i] = new SimpleDateFormat("dd.mm.yyyy").parse(str_date);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-					//gc.getTime();
+//			str_date = Long.parseLong(sleeps.get(i).getDate());
+//			Log.d("Datum:   ", "" + str_date);
+//			GregorianCalendar gc = new GregorianCalendar();
+//			gc.setTimeInMillis(str_date * 1000);
+//
+//			dt[i] = new Date(str_date);
+//				Log.d("datum normal mili 2", new Date(str_date) + " :::::::::: " + dt[i] + "  simple date :");
+//
+//				
+				
+				
+				str_date = sleeps.get(i).getDate();
+				GregorianCalendar gc = new GregorianCalendar();
+				gc.setTimeInMillis(Long.parseLong(str_date) * 1000);
+				dt[i] = gc.getTime();	
+				
+				Log.d("gc:  ", "" + gc.getTime());
+			// try {
+			//dt[i] = new SimpleDateFormat("dd.mm.yyyy").parse(str_date);
+			// } catch (ParseException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
+			// gc.getTime();
+			str_date = "";
 		}
 
-		//int maxStepsNumber = Integer.parseInt(sleeps.get(0).getHoursSlept());
+		// int maxStepsNumber = Integer.parseInt(sleeps.get(0).getHoursSlept());
 
 		int maxSleepNumber = 24;
 		// int max = Array.get(0);
 
-//		for (int i = 1; i < sleeps.size(); i++) {
-//			if (Integer.parseInt(sleeps.get(i).getHoursSlept()) > maxStepsNumber) {
-//				maxStepsNumber = Integer.parseInt(sleeps.get(i).getHoursSlept());
-//			}
-//		}
+		// for (int i = 1; i < sleeps.size(); i++) {
+		// if (Integer.parseInt(sleeps.get(i).getHoursSlept()) > maxStepsNumber)
+		// {
+		// maxStepsNumber = Integer.parseInt(sleeps.get(i).getHoursSlept());
+		// }
+		// }
 
 		// int count = 5;
 		// Date[] dt = new Date[5];
@@ -137,9 +163,6 @@ public class SleepGraphFragment extends Fragment {
 		// Toast.LENGTH_LONG).show();
 		// }
 
-		int[] visits = { 2000, 2500, 2700, 2100, 2800 };
-		int[] views = { 2200, 2700, 2900, 2800, 3200 };
-
 		// Creating TimeSeries for Visits
 		TimeSeries visitsSeries = new TimeSeries("Visits");
 
@@ -148,7 +171,15 @@ public class SleepGraphFragment extends Fragment {
 
 		// Adding data to Visits and Views Series
 		for (int i = 0; i < sleeps.size(); i++) {
-			viewsSeries.add(dt[i], Integer.parseInt(sleeps.get(i).getHoursSlept()));
+			//viewsSeries.add(dt[i], Double.parseDouble(sleeps.get(i).getHoursSlept()));
+			viewsSeries.add(dt[i], Double.parseDouble(sleeps.get(i).getHoursSlept()));
+			
+			
+			//Log.d("sleep date >", "" +  + " :: " + sleeps.get(i).getDate());
+
+			// Log.d("Sleep int> ","" +
+			// Double.parseDouble(sleeps.get(i).getHoursSlept()));
+			// Log.d("Sleep date> ","" + dt[i]);
 			// viewsSeries.add(dt[i],
 			// Double.parseDouble(steps.get(i).getDistance()));
 			// Toast.makeText(getActivity(), ""+ steps.get(i).getSteps(),
@@ -177,9 +208,9 @@ public class SleepGraphFragment extends Fragment {
 		XYSeriesRenderer viewsRenderer = new XYSeriesRenderer();
 		viewsRenderer.setColor(Color.rgb(34, 160, 51));
 		viewsRenderer.setPointStyle(PointStyle.SQUARE);
-		//viewsRenderer.setChartValuesSpacing(20);
-		//viewsRenderer.setDisplayChartValuesDistance(1);
-		//viewsRenderer.setFillPoints(true);
+		// viewsRenderer.setChartValuesSpacing(20);
+		// viewsRenderer.setDisplayChartValuesDistance(1);
+		// viewsRenderer.setFillPoints(true);
 		viewsRenderer.setLineWidth(5);
 		viewsRenderer.setDisplayChartValues(true);
 		viewsRenderer.setChartValuesTextSize(35);
@@ -200,10 +231,10 @@ public class SleepGraphFragment extends Fragment {
 		multiRenderer.setYAxisMax(maxSleepNumber);
 		multiRenderer.setShowGrid(true);
 		multiRenderer.setGridColor(Color.BLACK);
-		
+
 		multiRenderer.setXLabelsPadding(10);
 		multiRenderer.setYLabelsPadding(10);
-		//multiRenderer.setYLabelsVerticalPadding(10);
+		// multiRenderer.setYLabelsVerticalPadding(10);
 		// mine
 
 		multiRenderer.setLegendTextSize(40);
@@ -265,20 +296,20 @@ public class SleepGraphFragment extends Fragment {
 		// Adding the Line Chart to the LinearLayout
 		chartContainer.addView(mChart);
 	}
-	
-	public Period diffTime(String startTime, String endTime) {		
+
+	public Period diffTime(String startTime, String endTime) {
 		// joda library
 		DateTime startTime2, endTime2;
 		startTime2 = new DateTime(Long.parseLong(startTime) * 1000L);
 		endTime2 = new DateTime(Long.parseLong(endTime) * 1000L);
-		
+
 		Period p = new Period(startTime2, endTime2);
-//		long hours = p.getHours();
-//		long minutes = p.getMinutes();
-//		
-//		Log.d("cas", ""+ hours + " " + minutes);		
-		
+		// long hours = p.getHours();
+		// long minutes = p.getMinutes();
+		//
+		// Log.d("cas", ""+ hours + " " + minutes);
+
 		return p;
 	}
-	
+
 }
