@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <package id="1" language="java" name="com.erichstark.pedometer.drawer" project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/drawer" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="50" width="219" x="14" y="35"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <class id="2" language="java" name="com.erichstark.pedometer.drawer.LogoutFragment" project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/drawer/LogoutFragment.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="163" y="161"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.erichstark.pedometer.drawer.NavigationDrawerItem" project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/drawer/NavigationDrawerItem.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="144" y="404"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.erichstark.pedometer.drawer.NavigationDrawerListAdapter" 
+    project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/drawer/NavigationDrawerListAdapter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="514" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.erichstark.pedometer.drawer.SleepGraphFragment" project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/drawer/SleepGraphFragment.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="462" y="433"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.erichstark.pedometer.drawer.SleepHistoryFragment" project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/drawer/SleepHistoryFragment.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="865" y="148"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.erichstark.pedometer.drawer.StepGraphFragment" project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/drawer/StepGraphFragment.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="293" x="659" y="329"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.erichstark.pedometer.drawer.StepsHistoryFragment" project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/drawer/StepsHistoryFragment.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="171" y="699"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.erichstark.pedometer.drawer.SummaryFragment" project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/drawer/SummaryFragment.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="494" y="698"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.erichstark.pedometer.drawer.UserProfileFragment" project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/drawer/UserProfileFragment.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="293" x="682" y="547"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="11">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="12" name="navItems"/>      
+      <multiplicity id="13" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -1,7 +1,6 @@
 package com.erichstark.pedometer.drawer;
 
 import java.text.Format;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

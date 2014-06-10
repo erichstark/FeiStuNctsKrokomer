@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="com.erichstark.pedometer.sqlite.helper.DatabaseHelper" 
+    project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/sqlite/helper/DatabaseHelper.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="289" y="593"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="2" language="java" name="com.erichstark.pedometer.sqlite.helper" project="FeiStuNctsKrokomer" 
+    file="/FeiStuNctsKrokomer/src/com/erichstark/pedometer/sqlite/helper" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="154" y="-266"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
